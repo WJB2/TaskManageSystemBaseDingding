@@ -1,0 +1,524 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+ 
+	<changeSet id="create_sys_staff" author="zhujingjun">
+		<comment>创建员工信息表</comment>
+		<createTable tableName="sys_staff">
+			<column name="id" type="VARCHAR(32)" remarks="ID">
+				<constraints primaryKey="true" primaryKeyName="pk_sys_staff" nullable="false" />
+			</column>
+			<column name="tenant_id" type="VARCHAR(32)" remarks="租户ID">
+				<constraints nullable="false"/>
+			</column>
+			<column name="user_id" type="VARCHAR(32)" remarks="关联用户ID">
+				<constraints nullable="false"/>
+			</column>
+			<column name="username" type="VARCHAR(32)" remarks="关联用户用户名">
+				<constraints nullable="false"/>
+			</column>
+			<column name="name" type="VARCHAR(40)" remarks="人员姓名">
+				<constraints nullable="false"/>
+			</column>
+			<column name="name_pinyin" type="VARCHAR(40)" remarks="姓名简拼">
+				<constraints nullable="true"/>
+			</column>
+			<column name="id_card_no" type="VARCHAR(20)" remarks="身份证号">
+				<constraints nullable="true"/>
+			</column>
+			<column name="gender" type="VARCHAR(10)" remarks="性别">
+				<constraints nullable="true"/>
+			</column>
+			<column name="birthday" type="TIMESTAMP" remarks="生日">
+				<constraints nullable="true"/>
+			</column>
+			<column name="mobile" type="VARCHAR(25)" remarks="手机号">
+				<constraints nullable="true"/>
+			</column>
+			<column name="cornet" type="VARCHAR(25)" remarks="短号">
+				<constraints nullable="true"/>
+			</column>
+			<column name="telephone" type="VARCHAR(25)" remarks="电话">
+				<constraints nullable="true"/>
+			</column>
+			<column name="fax" type="VARCHAR(25)" remarks="传真">
+				<constraints nullable="true"/>
+			</column>
+			<column name="address" type="VARCHAR(256)" remarks="地址">
+				<constraints nullable="true"/>
+			</column>
+			<column name="status" type="NUMERIC(2,0)" remarks="人员状态， 1-活跃，2-锁定，3-禁用">
+				<constraints nullable="false"/>
+			</column>
+			<column name="deleted_flag" type="NUMERIC(2,0)" remarks="逻辑删除标记位，0-正常，1-删除">
+				<constraints nullable="false"/>
+			</column>
+			<column name="created_by_id" type="VARCHAR(32)" remarks="创建人">
+				<constraints nullable="true"/>
+			</column>
+			<column name="created_org_id" type="VARCHAR(32)" remarks="创建人所在组织机构">
+				<constraints nullable="true"/>
+			</column>
+			<column name="created_time" type="TIMESTAMP" remarks="创建时间">
+				<constraints nullable="true"/>
+			</column>
+			<column name="updated_by_id" type="VARCHAR(32)" remarks="更新人">
+				<constraints nullable="true"/>
+			</column>
+			<column name="updated_org_id" type="VARCHAR(32)" remarks="更新人所在组织机构">
+				<constraints nullable="true"/>
+			</column>
+			<column name="updated_time" type="TIMESTAMP" remarks="更新时间">
+				<constraints nullable="true"/>
+			</column>
+			<column name="deleted_by_id" type="VARCHAR(32)" remarks="删除人">
+				<constraints nullable="true"/>
+			</column>
+			<column name="deleted_org_id" type="VARCHAR(32)" remarks="删除人所在组织机构">
+				<constraints nullable="true"/>
+			</column>
+			<column name="deleted_time" type="TIMESTAMP" remarks="删除时间">
+				<constraints nullable="true"/>
+			</column>
+		</createTable>
+		<addUniqueConstraint tableName="sys_staff" columnNames="tenant_id, user_id" />
+		<rollback>
+			<sql>
+				drop table sys_staff
+			</sql>
+		</rollback>
+	</changeSet>
+	
+	<changeSet id="create_sys_role" author="zhujingjun">
+		<comment>创建角色信息表</comment>
+		<createTable tableName="sys_role">
+			<column name="id" type="VARCHAR(32)" remarks="ID">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="tenant_id" type="VARCHAR(32)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="code" type="VARCHAR(32)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="name" type="VARCHAR(40)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="name_pinyin" type="VARCHAR(40)">
+				<constraints nullable="true"/>
+			</column>
+			<column name="name_abbr" type="VARCHAR(40)">
+				<constraints nullable="true"/>
+			</column>
+			<column name="name_abbr_pinyin" type="VARCHAR(40)">
+				<constraints nullable="true"/>
+			</column>
+			<column name="name_alias" type="VARCHAR(40)">
+				<constraints nullable="true"/>
+			</column>
+			<column name="name_alias_pinyin" type="VARCHAR(40)">
+				<constraints nullable="true"/>
+			</column>
+			<column name="deleted_flag" type="NUMERIC(2,0)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="sort_no" type="NUMERIC(8,0)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="created_by_id" type="VARCHAR(32)">
+				<constraints nullable="true"/>
+			</column>
+			<column name="created_org_id" type="VARCHAR(32)">
+				<constraints nullable="true"/>
+			</column>
+			<column name="created_time" type="TIMESTAMP">
+				<constraints nullable="true"/>
+			</column>
+			<column name="updated_by_id" type="VARCHAR(32)">
+				<constraints nullable="true"/>
+			</column>
+			<column name="updated_org_id" type="VARCHAR(32)">
+				<constraints nullable="true"/>
+			</column>
+			<column name="updated_time" type="TIMESTAMP">
+				<constraints nullable="true"/>
+			</column>
+			<column name="deleted_by_id" type="VARCHAR(32)">
+				<constraints nullable="true"/>
+			</column>
+			<column name="deleted_org_id" type="VARCHAR(32)">
+				<constraints nullable="true"/>
+			</column>
+			<column name="deleted_time" type="TIMESTAMP">
+				<constraints nullable="true"/>
+			</column>
+		</createTable>
+		<addUniqueConstraint tableName="sys_role" columnNames="tenant_id, code"/>
+		<rollback>
+			<sql>
+				drop table sys_role
+			</sql>
+		</rollback>
+	</changeSet>
+	
+	<changeSet id="create_sys_organization" author="zhujingjun">
+		<comment>创建角色信息表</comment>
+		<createTable tableName="sys_organization">
+			<column name="id" type="VARCHAR(32)" remarks="ID">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="tenant_id" type="VARCHAR(32)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="parent_id" type="VARCHAR(32)">
+				<constraints nullable="true"/>
+			</column>
+			<column name="code" type="VARCHAR(32)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="name" type="VARCHAR(40)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="name_pinyin" type="VARCHAR(40)">
+				<constraints nullable="true"/>
+			</column>
+			<column name="name_abbr" type="VARCHAR(40)">
+				<constraints nullable="true"/>
+			</column>
+			<column name="name_abbr_pinyin" type="VARCHAR(40)">
+				<constraints nullable="true"/>
+			</column>
+			<column name="name_alias" type="VARCHAR(40)">
+				<constraints nullable="true"/>
+			</column>
+			<column name="name_alias_pinyin" type="VARCHAR(40)">
+				<constraints nullable="true"/>
+			</column>
+			<column name="sort_no" type="NUMERIC(8,0)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="deleted_flag" type="NUMERIC(2,0)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="created_by_id" type="VARCHAR(32)">
+				<constraints nullable="true"/>
+			</column>
+			<column name="created_org_id" type="VARCHAR(32)">
+				<constraints nullable="true"/>
+			</column>
+			<column name="created_time" type="TIMESTAMP">
+				<constraints nullable="true"/>
+			</column>
+			<column name="updated_by_id" type="VARCHAR(32)">
+				<constraints nullable="true"/>
+			</column>
+			<column name="updated_org_id" type="VARCHAR(32)">
+				<constraints nullable="true"/>
+			</column>
+			<column name="updated_time" type="TIMESTAMP">
+				<constraints nullable="true"/>
+			</column>
+			<column name="deleted_by_id" type="VARCHAR(32)">
+				<constraints nullable="true"/>
+			</column>
+			<column name="deleted_org_id" type="VARCHAR(32)">
+				<constraints nullable="true"/>
+			</column>
+			<column name="deleted_time" type="TIMESTAMP">
+				<constraints nullable="true"/>
+			</column>
+		</createTable>
+		<addUniqueConstraint tableName="sys_organization" columnNames="tenant_id, code"/>
+		<rollback>
+			<sql>
+				drop table sys_organization
+			</sql>
+		</rollback>
+	</changeSet>
+
+	<changeSet id="alter_sys_organzation_add_type" author="zhujingjun">
+		<addColumn tableName="sys_organization">
+			<column name="type" type="VARCHAR(64)" remarks="组织机构类型"></column>
+		</addColumn>
+	</changeSet>
+	
+	<changeSet id="create_sys_post" author="zhujingjun">
+		<comment>创建工作职位信息表</comment>
+		<createTable tableName="sys_post">
+			<column name="id" type="VARCHAR(32)" remarks="ID">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="tenant_id" type="VARCHAR(32)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="parent_id" type="VARCHAR(32)">
+				<constraints nullable="true"/>
+			</column>
+			<column name="code" type="VARCHAR(32)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="name" type="VARCHAR(40)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="name_pinyin" type="VARCHAR(40)">
+				<constraints nullable="true"/>
+			</column>
+			<column name="name_abbr" type="VARCHAR(40)">
+				<constraints nullable="true"/>
+			</column>
+			<column name="name_abbr_pinyin" type="VARCHAR(40)">
+				<constraints nullable="true"/>
+			</column>
+			<column name="name_alias" type="VARCHAR(40)">
+				<constraints nullable="true"/>
+			</column>
+			<column name="name_alias_pinyin" type="VARCHAR(40)">
+				<constraints nullable="true"/>
+			</column>
+			<column name="sort_no" type="NUMERIC(8,0)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="deleted_flag" type="NUMERIC(2,0)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="created_by_id" type="VARCHAR(32)">
+				<constraints nullable="true"/>
+			</column>
+			<column name="created_org_id" type="VARCHAR(32)">
+				<constraints nullable="true"/>
+			</column>
+			<column name="created_time" type="TIMESTAMP">
+				<constraints nullable="true"/>
+			</column>
+			<column name="updated_by_id" type="VARCHAR(32)">
+				<constraints nullable="true"/>
+			</column>
+			<column name="updated_org_id" type="VARCHAR(32)">
+				<constraints nullable="true"/>
+			</column>
+			<column name="updated_time" type="TIMESTAMP">
+				<constraints nullable="true"/>
+			</column>
+			<column name="deleted_by_id" type="VARCHAR(32)">
+				<constraints nullable="true"/>
+			</column>
+			<column name="deleted_org_id" type="VARCHAR(32)">
+				<constraints nullable="true"/>
+			</column>
+			<column name="deleted_time" type="TIMESTAMP">
+				<constraints nullable="true"/>
+			</column>
+		</createTable>
+		<addUniqueConstraint tableName="sys_post" columnNames="tenant_id, code"/>
+		<rollback>
+			<sql>
+				drop table sys_post
+			</sql>
+		</rollback>
+	</changeSet>
+	
+	<changeSet id="create_sys_position" author="zhujingjun">
+		<comment>创建员工岗位信息表</comment>
+		<createTable tableName="sys_position">
+			<column name="id" type="VARCHAR(32)" remarks="ID">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="tenant_id" type="VARCHAR(32)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="staff_id" type="VARCHAR(32)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="org_id" type="VARCHAR(32)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="post_id" type="VARCHAR(32)">
+				<constraints nullable="true"/>
+			</column>
+			<column name="is_primary" type="NUMERIC(2,0)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="deleted_flag" type="NUMERIC(2,0)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="created_by_id" type="VARCHAR(32)">
+				<constraints nullable="true"/>
+			</column>
+			<column name="created_org_id" type="VARCHAR(32)">
+				<constraints nullable="true"/>
+			</column>
+			<column name="created_time" type="TIMESTAMP">
+				<constraints nullable="true"/>
+			</column>
+			<column name="updated_by_id" type="VARCHAR(32)">
+				<constraints nullable="true"/>
+			</column>
+			<column name="updated_org_id" type="VARCHAR(32)">
+				<constraints nullable="true"/>
+			</column>
+			<column name="updated_time" type="TIMESTAMP">
+				<constraints nullable="true"/>
+			</column>
+			<column name="deleted_by_id" type="VARCHAR(32)">
+				<constraints nullable="true"/>
+			</column>
+			<column name="deleted_org_id" type="VARCHAR(32)">
+				<constraints nullable="true"/>
+			</column>
+			<column name="deleted_time" type="TIMESTAMP">
+				<constraints nullable="true"/>
+			</column>
+		</createTable>
+		<addUniqueConstraint tableName="sys_position" columnNames="tenant_id, staff_id, org_id, post_id"/>
+		<rollback>
+			<sql>
+				drop table sys_position
+			</sql>
+		</rollback>
+	</changeSet>
+	
+	<changeSet id="create_sys_role_authz" author="zhujingjun">
+		<comment>创建角色授权表</comment>
+		<createTable tableName="sys_role_authz">
+			<column name="id" type="VARCHAR(32)" remarks="ID">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="tenant_id" type="VARCHAR(32)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="type" type="NUMERIC(2,0)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="target_id" type="VARCHAR(32)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="role_id" type="VARCHAR(32)">
+				<constraints nullable="false"/>
+			</column>
+		</createTable>
+		<rollback>
+			drop table sys_role_authz
+		</rollback>
+	</changeSet>
+	
+	<changeSet id="create_sys_permission_authz" author="zhujingjun">
+		<comment>创建权限授权表</comment>
+		<createTable tableName="sys_permission_authz">
+			<column name="id" type="VARCHAR(32)" remarks="ID">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="tenant_id" type="VARCHAR(32)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="type" type="NUMERIC(2,0)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="target_id" type="VARCHAR(32)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="permission_id" type="VARCHAR(32)">
+				<constraints nullable="false"/>
+			</column>
+		</createTable>
+		<rollback>
+			drop table sys_permission_authz
+		</rollback>
+	</changeSet>
+	
+	<changeSet id="create_sys_data_scope_authz" author="zhujingjun">
+		<comment>创建数据访问授权表</comment>
+		<createTable tableName="sys_data_scope_authz">
+			<column name="id" type="VARCHAR(32)" remarks="ID">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="tenant_id" type="VARCHAR(32)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="authz_type" type="NUMERIC(2,0)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="target_id" type="VARCHAR(32)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="permission_id" type="VARCHAR(32)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="scope" type="NUMERIC(2,0)">
+				<constraints nullable="false"/>
+			</column>
+		</createTable>
+		<rollback>
+			drop table sys_data_scope_authz
+		</rollback>
+	</changeSet>
+
+	<changeSet id="init-system-module" author="zhujingjun">
+
+		<sql>
+			insert into gbl_module(id, name, icon, link_path, menu_id, sort_no)
+			values('18c7f44f72034ab3b27251afa1e39015', '系统管理', 'setting', '/system/user', 'fd0c794cf43e11e78c3f9a214cf093ae', 9999);
+		</sql>
+	</changeSet>
+
+	<changeSet id="create_sys_file_info" author="zhujingjun">
+		<comment>创建文件信息表</comment>
+		<createTable tableName="sys_file_info">
+			<column name="id" type="VARCHAR(32)" remarks="ID">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="tenant_id" type="VARCHAR(32)" remarks="租户ID">
+				<constraints nullable="false" />
+			</column>
+			<column name="name" type="VARCHAR(80)" remarks="文件名称">
+				<constraints nullable="false" />
+			</column>
+			<column name="file_type" type="VARCHAR(64)" remarks="文件类型">
+				<constraints nullable="false" />
+			</column>
+			<column name="file_size" type="NUMERIC(10, 0)" remarks="文件大小">
+				<constraints nullable="false" />
+			</column>
+			<column name="file_url" type="VARCHAR(256)" remarks="文件URL">
+				<constraints nullable="false" />
+			</column>
+			<column name="created_by_id" type="VARCHAR(32)">
+				<constraints nullable="true"/>
+			</column>
+			<column name="created_org_id" type="VARCHAR(32)">
+				<constraints nullable="true"/>
+			</column>
+			<column name="created_time" type="TIMESTAMP">
+				<constraints nullable="true"/>
+			</column>
+		</createTable>
+	</changeSet>
+
+	<changeSet id="create_sys_file_info_link" author="zhujingjun">
+		<createTable tableName="sys_file_info_link">
+			<column name="id" type="VARCHAR(32)" remarks="ID">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="tenant_id" type="VARCHAR(32)" remarks="租户ID">
+				<constraints nullable="false" />
+			</column>
+			<column name="file_info_id" type="VARCHAR(32)" remarks="文件信息ID">
+				<constraints nullable="false" />
+			</column>
+			<column name="domain_type" type="VARCHAR(64)" remarks="业务实体类型">
+				<constraints nullable="false" />
+			</column>
+			<column name="domain_field" type="VARCHAR(64)" remarks="业务实体字段">
+				<constraints nullable="true" />
+			</column>
+			<column name="domain_id" type="VARCHAR(32)" remarks="业务实体ID">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+
+		<addUniqueConstraint tableName="sys_file_info_link" columnNames="file_info_id, domain_type, domain_field, domain_id" />
+	</changeSet>
+
+ </databaseChangeLog>

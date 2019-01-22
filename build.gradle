@@ -1,0 +1,140 @@
+
+
+
+buildscript {
+    apply from: 'libraries.gradle'
+
+    repositories{
+        mavenLocal()
+        maven {
+            url 'http://maven.aliyun.com/nexus/content/groups/public/'
+        }
+        maven {
+            url 'https://repo.spring.io/libs-milestone'
+        }
+        maven {
+            url 'http://111.231.98.86:8081/repository/maven-snapshots/'
+        }
+        maven {
+            url 'http://111.231.98.86:8081/repository/maven-public/'
+        }
+    }
+
+    dependencies {
+        classpath "org.zeroturnaround:gradle-jrebel-plugin:1.1.7"
+    }
+}
+
+allprojects {
+    project ->
+    plugins.withId('java') {
+        project.apply plugin: 'org.zeroturnaround.gradle.jrebel'
+        def jarTask = project.tasks.findByName('jar')
+        if (jarTask) {
+            jarTask.dependsOn(generateRebel)
+        }
+        def warTask = project.tasks.findByName('war')
+        if (warTask) {
+            warTask.dependsOn(generateRebel)
+        }
+    }
+}
+
+subprojects {
+
+    group 'com.hozensoft'
+
+    version '0.0.1-SNAPSHOT'
+
+    apply plugin: "eclipse-wtp"
+    apply plugin: "eclipse"
+    apply plugin: "idea"
+    apply plugin: "java"
+
+
+
+    sourceCompatibility = 1.8
+
+
+    repositories{
+        mavenLocal()
+        maven {
+            url 'http://maven.aliyun.com/nexus/content/groups/public/'
+        }
+        maven {
+            url 'https://repo.spring.io/libs-milestone'
+        }
+        maven {
+            url 'http://111.231.98.86:8081/repository/maven-snapshots/'
+        }
+        maven {
+            url 'http://111.231.98.86:8081/repository/maven-public/'
+        }
+    }
+
+    idea {
+        module {
+            inheritOutputDirs = true
+            downloadJavadoc = true
+            downloadSources = true
+        }
+    }
+
+    configurations.all {
+        exclude group: "commons-logging", module: "commons-logging"
+        exclude group: 'log4j', module: 'log4j'
+        exclude group: 'ch.qos.logback', module: 'logback-core'
+        exclude group: 'ch.qos.logback', module: 'logback-classic'
+        exclude group: 'org.slf4j', module: 'slf4j-log4j12'
+        //exclude group: 'org.apache.logging.log4j', module: 'log4j-slf4j-impl'
+        //exclude group: 'org.apache.logging.log4j', module: 'log4j-to-slf4j'
+        exclude group: 'org.opensymphony.quartz', module: 'quartz'
+        exclude group: 'javax.xml.stream', module: 'stax-api'
+        exclude group: 'stax', module: 'stax-api'
+
+        resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+    }
+
+
+    dependencies {
+        compile libraries.sprintBootStarter
+        compile libraries.springfox
+        compile libraries.pagehelper
+        compile libraries.database
+        compile libraries.artemis
+        compile libraries.shiro
+        compile libraries.commons
+        compile libraries.jodaTime
+        compile libraries.lombok
+        compile libraries.poi
+
+        testCompile 'junit:junit:4.12'
+    }
+
+    sourceSets {
+        main {
+            resources {
+                srcDir 'src/main/java' //可以将java目录下的所有非.java资源打包到classes下
+            }
+        }
+    }
+
+    tasks.withType(JavaCompile) {
+        options.encoding = "UTF-8"
+    }
+
+    configurations.all {
+        // check for updates every build
+        resolutionStrategy.cacheChangingModulesFor 1, 'seconds'
+    }
+
+
+    /*pmd {
+        consoleOutput = true
+        reportsDir = file("build/reports/pmd")
+
+        ruleSets = [
+                "java-ali-comment"
+        ]
+    }*/
+}

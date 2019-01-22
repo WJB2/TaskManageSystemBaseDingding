@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hozensoft.task.core.dao.repo.TaskTagRepo">
+
+    <insert id="addTaskTag" >
+        insert into tm_task_tag(id, tenant_id, tag_type, name, org_id, staff_id)
+        values (#{id}, #{tenantId}, #{tagType,jdbcType=NUMERIC}, #{name}, #{orgId}, #{staffId})
+    </insert>
+
+    <update id="editTaskTag">
+        update tm_task_tag set
+          tenant_id = #{tenantId},
+          tag_type = #{tagType,jdbcType=NUMERIC},
+          name = #{name},
+          org_id = #{orgId},
+          staff_id = #{staffId}
+        where id = #{id}
+    </update>
+
+    <update id="patchEditTaskTag">
+        update tm_task_tag
+        <set>
+            <if test="tenantId!= null">
+                tenant_id = #{tenantId},
+            </if>
+            <if test="tagType != null">
+                tag_type = #{tagType,jdbcType=NUMERIC},
+            </if>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="orgId != null">
+                org_id = #{orgId},
+            </if>
+            <if test="staffId != null">
+                staff_id = #{staffId}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTaskTagById">
+        delete from tm_task_tag  where id = #{taskTagId}
+    </delete>
+
+    <resultMap id="taskTagMap" type="com.hozensoft.task.core.domain.TaskTag">
+        <id property="id" column="id"/>
+        <result property="tenantId" column="tenant_id"/>
+        <result property="tagType" column="tag_type"/>
+        <result property="name" column="name"/>
+        <result property="orgId" column="org_id"/>
+        <result property="staffId" column="staff_id"/>
+    </resultMap>
+
+    <sql id="selectTaskTagPart">
+        select tt.id as id, tt.tenant_id as tenant_id, tt.tag_type as tag_type, tt.name as name,
+        tt.org_id as org_id, tt.staff_id as staff_id
+        from tm_task_tag as tt
+    </sql>
+
+    <select id="loadTaskTagById">
+        <include refid="selectTaskTagPart"/>
+        where id = #{taskTagId}
+    </select>
+</mapper>

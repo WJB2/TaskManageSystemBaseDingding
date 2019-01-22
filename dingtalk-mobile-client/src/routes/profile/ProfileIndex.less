@@ -1,0 +1,355 @@
+@import '../../styles/default.less';
+
+.profileIndex{
+
+  width:100%;
+  height:100%;
+
+  .profileSuspend{
+
+    overflow:auto;
+    width:100%;
+
+    .suspendList{
+
+      background-color:@colorB;
+      width:94%;
+      height:2rem;
+      border-radius:10px;
+      .pos(r);
+      margin:0.2rem auto;
+      padding-left:0.2rem;
+      box-shadow:1px 1px 2px #ddd;
+
+    }
+
+  }
+
+  .profileArchived{
+
+    overflow:auto;
+    width:100%;
+
+    .archivedList{
+
+      background-color:@colorB;
+      width:94%;
+      height:2rem;
+      border-radius:10px;
+      .pos(r);
+      margin:0.2rem auto;
+      padding-left:0.2rem;
+      box-shadow:1px 1px 2px #ddd;
+
+
+    }
+
+  }
+
+  .profileTag{
+
+    position:fixed;
+    z-index:10;
+    background-color:@colorH;
+    width:100%;
+    height:100%;
+
+    .profileText{
+      width:100%;
+      height:1rem;
+      line-height:1rem;
+      background-color:@colorQ;
+      padding-left:0.5rem;
+      color:@colorY;
+    }
+
+    .profileSystemList{
+
+      background-color:@colorB;
+      .widthandheight(100%,1.5rem,1.5rem);
+      border-bottom:1px solid #DDDDDD;
+
+      :nth-child(1){
+        .widthandheight(0.2rem,0.2rem,0.2rem);
+        border-radius:50%;
+        margin:0 0.5rem;
+        display:inline-block;
+      }
+
+      .profileTextA{
+        display:inline-block;
+      }
+
+    }
+
+    .profileStaff {
+
+      position:relative;
+      .widthandheight(100%, 1rem, 1rem);
+      background-color: @colorQ;
+      padding-left:0.5rem;
+      color: @colorY;
+
+      .profileStaffPlus {
+        .pos(a);
+        right: 1.5rem;
+        top: 23%;
+        .widthandheight(0.5rem, 0.5rem, 0.5rem);
+        display: inline-block;
+        background-color: @colorI;
+        border-radius: 50%;
+        color: @colorB;
+        font-size: 0.5rem;
+        box-sizing:border-box;
+      }
+
+      .after {
+        display: inline-block;
+        background: @colorB;
+        height: 0.2rem;
+        left: 0.24rem;
+        top: 0.12rem;
+        .pos(a);
+        width: 1px;
+      }
+
+      .after:after {
+        background: @colorB;
+        content: "";
+        height: 0.2rem;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 1px;
+        transform: rotateZ(90deg)
+      }
+
+    }
+
+    .profileSatffTag {
+
+      background-color: @colorB;
+      .widthandheight(100%, 1.5rem, 1.5rem);
+      border-bottom: 1px solid #DDDDDD;
+
+      :nth-child(1) {
+        .widthandheight(0.2rem, 0.2rem, 0.2rem);
+        border-radius: 50%;
+        margin: 0 0.5rem;
+        display: inline-block;
+      }
+
+      .profileStaffText {
+        display: inline-block;
+      }
+
+    }
+
+    .profileOrangationTag{
+
+      .pos(r);
+      .widthandheight(100%,1rem,1rem);
+      background-color:@colorQ;
+      color:@colorY;
+      padding-left:0.5rem;
+
+    }
+
+  }
+
+  .profileGroup{
+
+    width:100%;
+    height:100%;
+    background-color:@colorJ;
+
+    .groupName{
+
+      height:1rem;
+      line-height:1rem;
+      width:100%;
+      padding-left:0.5rem;
+
+    }
+
+    :global{
+      .am-list{
+        background-color:#fff;
+        max-height:12rem;
+        min-height:12rem;
+        overflow:scroll;
+        -webkit-overflow-scrolling:touch;
+      }
+    }
+
+    .groupButton{
+      width:100%;
+      position:fixed;
+      bottom:1rem;
+    }
+  }
+
+
+}
+
+.minethree{
+  background-color:#fff;
+  .widthandheight(100%,1.2rem,1.2rem);
+  padding-left:0.5rem;
+
+  :nth-child(1){
+    color:@colorO;
+    margin-right:0.4rem;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+.profilepane{
+
+  .mineblock{
+    width:100%;
+    height:5rem;
+    background-color:#39437B;
+    z-index:10;
+    .pos(a);
+
+    .mineradius{
+      background-color:#fff;
+      position:relative;
+      .widthandheight(50px,50px,50px);
+      top:20px;
+      margin:0 auto;
+      border-radius:50%;
+      border:2px solid #BAC0C6;
+      div{
+        font-size:1.7rem;
+        color:@colorO;
+        .pos(r);
+        right:0.2rem;
+        top:0.2rem;
+      }
+    }
+    .minename{
+      position:relative;
+      top:1rem;
+      margin:0 auto;
+      width:3rem;
+      text-align:center;
+      color:#fff;
+    }
+  }
+
+
+  .mineline{
+    .pos(a);
+    width:100%;
+    top:5rem;
+    .minethree{
+      background-color:#fff;
+      .widthandheight(100%,1.2rem,1.2rem);
+      padding-left:0.5rem;
+
+      :nth-child(1){
+        color:@colorO;
+        margin-right:0.4rem;
+      }
+    }
+  }
+
+  .mineconfig{
+    .pos(a);
+    top:10.2rem;
+    width:100%;
+  }
+
+  .mineinfo{
+    .pos(a);
+    top:10.6rem;
+    width:100%;
+  }
+
+
+}
+
+.tagadd{
+  .pos(a);
+  top:0;
+  left:0;
+  .widthandheight(100%,calc(100% - 1.2rem),normal);
+  background-color:@colorP;
+  z-index:20;
+
+  .navbar{
+    .pos(f);
+    .widthandheight(100%,1.2rem,1.2rem);
+    top:0px;
+    background-color:#3A4479;
+    z-index:1;
+    div{
+      display:inline;
+      font-size:16px;
+      color:#fff;
+    }
+    :nth-child(1){
+      margin:0 0.3rem;
+    }
+    :nth-child(3){
+      margin:0 2.7rem;
+    }
+  }
+
+  .taggreyline{
+    .greyline;
+  }
+
+  .tagsave{
+    .widthandheight(100%,1.5rem,1.5rem);
+    background-color:@colorI;
+    color:@colorB;
+    .pos(f);
+    z-index:10;
+    bottom:0;
+    text-align:center;
+  }
+
+  .tagcolorball{
+    .widthandheight(0.5rem,0.5rem,0.5rem);
+    display:inline-block;
+    border-radius:50%;
+    margin-right:0.5rem;
+
+  }
+
+  .editbutton{
+    .pos(f);
+    bottom:0;
+    .widthandheight(100%,1.5rem,1.5rem);
+    font-size:0.4rem;
+    text-align:center;
+    z-index:10;
+
+    :nth-child(1){
+      display:inline-block;
+      width:50%;
+      color:@colorB;
+      background-color:@colorI;
+    }
+
+    :nth-child(2){
+      display:inline-block;
+      width:50%;
+      color:@colorI;
+      background-color:@colorB;
+    }
+
+  }
+
+}

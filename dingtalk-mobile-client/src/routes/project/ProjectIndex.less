@@ -1,0 +1,491 @@
+@import '../../styles/default.less';
+
+.projectIndex{
+
+  width:100%;
+  height:100%;
+
+  .projectMenu{
+
+    display:flex;
+    width:100%;
+    min-height:1rem;
+    flex-direction:column;
+    position:fixed;
+    z-index:10;
+
+    .searchbar{
+      :global{
+        .am-search{
+          position:fixed;
+          width:100%;
+          height:1rem;
+          top:0rem;
+          padding:0;
+        }
+      }
+    }
+
+    .projectMenuHeader{
+
+
+      display:flex;
+      background-color:@colorB;
+      width:100%;
+      height:1rem;
+      top:0rem;
+      align-items:center;
+      border-bottom:1px solid #ddd;
+
+
+      .projectMenuName{
+        margin:0 auto;
+      }
+
+      :nth-child(2){
+
+        position:absolute;
+        right:0.5rem;
+        font-size:0.5rem;
+
+      }
+
+    }
+
+    .projectmenubody{
+
+      overflow-y:hidden;
+      -webkit-transition-property: all;
+      -webkit-transition-duration: .5s;
+      -webkit-transition-timing-function: ease-in;
+      width:100%;
+      height:4rem;
+      font-size:0.4rem;
+      background-color:#fff;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      z-index:13;
+
+      .projectmenuitem{
+
+        width:100%;
+        min-height:1rem;
+        position:relative;
+        padding-left:5%;
+        padding-top:0.25rem;
+        border-bottom:1px solid #DDD;
+        box-sizing:border-box;
+
+        :nth-child(1){
+          position:absolute;
+          font-size:0.3rem;
+          color:#7FA9E5;
+          right:10%;
+          top:40%;
+        }
+      }
+    }
+
+    .projectcover{
+
+      width:100%;
+      position:fixed;
+      height:100%;
+      background-color:#000;
+      opacity:0.5;
+      z-index:12;
+    }
+
+  }
+
+  .projectList{
+
+    width:100%;
+    position:absolute;
+    box-sizing:border-box;
+    top:1.2rem;
+    z-index:1;
+    -webkit-overflow-scrolling:touch;
+    height:calc( 100% - 2.2rem);
+
+    .projectSum{
+
+      width:100%;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      box-sizing:border-box;
+      background-color:@colorH;
+
+      .projectinlist{
+
+        width:96%;
+        height:2rem;
+        background-color:@colorB;
+        box-sizing:border-box;
+        margin:0.2rem auto;
+        border-radius:5px;
+        box-shadow:1px 1px 2px 1px #DCDCDC;
+        .pos(r);
+
+        .canvas{
+          .pos(a);
+          right:0.5rem;
+          top:8%;
+        }
+
+        .projecttaskcounts{
+          .pos(a);
+          right:1.45rem;
+          top:0.7rem;
+          font-size:0.5rem;
+        }
+
+        .projectlistdiv1{
+          width:80%;
+          height:20%;
+          border-left:3px solid #FF5F54;
+        }
+
+        .projectlistdiv2{
+          .widthandheight(100%,80%,normal);
+          padding-left:0.5rem;
+
+          :nth-child(1){
+            font-weight:bold;
+            font-size:0.4rem;
+          }
+          :nth-child(2){
+            font-size:0.3rem;
+            color:grey;
+            margin-top:0.1rem;
+          }
+
+        }
+      }
+
+    }
+
+  }
+
+  .projectDetail{
+
+    position:fixed;
+    z-index:15;
+    width:100%;
+    height:100%;
+    background-color:#fff;
+
+    .projectDetailTask{
+
+      .projectTask{
+        z-index:25;
+
+         .taskList{
+           border-bottom:1px solid #ddd;
+           height:1.5rem;
+           line-height:1.5rem;
+           padding-left:0.5rem;
+
+         }
+
+      }
+
+      .backButton{
+        color:blue;
+        position:fixed;
+        bottom:0;
+        width:100%;
+        height:1.5rem;
+        line-height:1.5rem;
+        background-color:@colorJ;
+        text-align:center;
+        color:#fff;
+        font-size:0.5rem;
+      }
+
+    }
+
+    .projectDetailLog{
+
+      .backButton{
+        color:blue;
+        position:fixed;
+        bottom:0;
+        width:100%;
+        height:1.5rem;
+        line-height:1.5rem;
+        background-color:@colorJ;
+        text-align:center;
+        color:#fff;
+        font-size:0.5rem;
+      }
+
+    }
+
+    .projectDetailAccess{
+
+      .backButton{
+        color:blue;
+        position:fixed;
+        bottom:0;
+        width:100%;
+        height:1.5rem;
+        line-height:1.5rem;
+        background-color:@colorJ;
+        text-align:center;
+        color:#fff;
+        font-size:0.5rem;
+      }
+
+    }
+
+  }
+
+  .bottom{
+
+    background-color:@colorB;
+    height:1.2rem;
+    width:100%;
+    position:fixed;
+    bottom:0;
+    z-index:5;
+
+  }
+
+  .divline {
+    border-bottom: 1px solid #f0f0f0;
+    border-top: 1px solid #f0f0f0;
+    width: 100%;
+    float: left;
+    height: 1px;
+    display: inline-block;
+    margin: -14px 0 25px 0;
+  }
+
+  :global{
+    .am-tab-bar-bar{
+      z-index:5;
+    }
+  }
+
+}
+
+.projectdetailindex{
+
+  position:absolute;
+  .widthandheight(100%,100%,normal);
+  background-color:@colorH;
+
+
+  .projectdetailcircle{
+    .widthandheight(1.3rem,1.3rem,1.3rem);
+    background-color:@colorI;
+    border-radius:50%;
+    .pos(f);
+    right:1rem;
+    bottom:2rem;
+    z-index:1;
+    box-shadow:@colorI 0px 0px 10px;
+    text-align:center;
+    .projectdetailplus{
+      display: inline-block;
+      background: @colorB;
+      height: 0.6rem;
+      .pos(a);
+      top:0.35rem;
+      width: 2px;
+    }
+    .projectdetailplus:after {
+      background: @colorB;
+      content: "";
+      height: 0.6rem;
+      left: 0;
+      position: absolute;
+      top: 0;
+      width: 2px;
+      transform: rotateZ(90deg)
+    }
+  }
+
+}
+
+.projectForm{
+
+  position:fixed;
+  width:100%;
+  height:100%;
+  top:0;
+  background-color:@colorH;
+
+  :global{
+    .am-list-item .am-input-control input{
+      direction: rtl;
+    }
+  }
+
+  .projectAddForm{
+
+      .pos(a);
+      top:0;
+      .widthandheight(100%,calc(100% - 2rem),normal);
+
+  }
+
+
+
+  .projectSubmitButton{
+
+    .widthandheight(100%,1.5rem,1.5rem);
+    background-color:@colorI;
+    font-size:0.5rem;
+    .pos(f);
+    bottom:0;
+    color:#fff;
+    text-align:center;
+
+  }
+
+  .editbutton{
+    .pos(f);
+    bottom:0;
+    .widthandheight(100%,1.5rem,1.5rem);
+    font-size:0.4rem;
+    text-align:center;
+    z-index:10;
+
+    :nth-child(1){
+      display:inline-block;
+      width:50%;
+      color:@colorB;
+      background-color:@colorI;
+    }
+
+    :nth-child(2){
+      display:inline-block;
+      width:50%;
+      color:@colorI;
+      background-color:@colorB;
+    }
+
+  }
+}
+
+
+.projectdetailtask{//项目任务列表面板
+
+  .projectdetailmenu{
+
+    .pos(a);
+    .widthandheight(100%,1rem,1rem);
+    background-color:@colorB;
+
+    div{
+      display:inline-block;
+      text-align:center;
+    }
+
+    .projectdetailmenu1{
+      width:35%;
+    }
+
+    .projectdetailmenu2{
+      width:35%;
+    }
+
+    :nth-child(3){
+      width:15%;
+    }
+
+    :nth-child(4){
+      width:15%;
+      color:@colorN;
+    }
+
+    box-shadow:1px 1px 1px 1px red insert!important;
+
+  }
+
+  .projectdetailtask{
+
+    .pos(a);
+    top:1rem;
+    width:100%;
+    .projectdetaillist{
+
+      background-color:@colorB;
+      .widthandheight(100%,1.5rem,normal);
+      border-bottom:1px solid #ddd;
+
+      .projectdetaillist1{
+        .pos(r);
+        left:0.5rem;
+        top:0.3rem;
+      }
+
+      .projectdetaillist2{
+        .pos(r);
+        left:0.4rem;
+        top:0.4rem;
+        font-size:0.1rem;
+        background-color:@colorW;
+        width:1.2rem;
+        .borderRadius(100px);
+        border: 0 solid transparent;
+      }
+    }
+  }
+}
+
+
+.projectdetailprogress{
+  width:100%;
+  .pos(a);
+  top:1.2rem;
+
+  .projectseg{
+    .widthandheight(100%,1rem,1rem);
+    background-color:grey;
+    .pos(f);
+
+  }
+
+}
+.maincirclea{
+
+  width:1.3rem;
+  height:1.3rem;
+  border-radius:50%;
+  position:fixed;
+  display:flex;
+  bottom:2rem;
+  right:0.8rem;
+  z-index:6;
+  text-align:center;
+  align-items:center;
+  justify-content:center;
+
+  .mainplus{
+
+    background: @colorB;
+    height: 0.6rem;
+    .pos(a);
+    top:0.33rem;
+    width: 2px;
+
+  }
+
+  .mainplus:after {
+
+    background: @colorB;
+    content: "";
+    height: 0.6rem;
+    left: 0.2;
+    position: absolute;
+    top: 0;
+    width: 2px;
+    transform: rotateZ(90deg)
+
+  }
+}
+

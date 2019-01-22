@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hozensoft.task.core.dao.query.TaskOperateLogQuery">
+
+    <resultMap id="taskOperateLogItemDtoMap" type="com.hozensoft.task.core.dto.TaskOperateLogItemDto">
+        <id property="id" column="id" />
+        <result property="opType" column="op_type" />
+        <result property="taskId" column="task_id" />
+        <result property="operateById" column="operate_by_id" />
+        <result property="operateTime" column="operate_time" />
+        <result property="description" column="description" />
+    </resultMap>
+
+    <resultMap id="taskOperateLogWithTaskItemDtoMap" type="com.hozensoft.task.core.dto.TaskOperateLogWithTaskItemDto">
+        <id property="id" column="id" />
+        <result property="opType" column="op_type" />
+        <result property="taskId" column="task_id" />
+        <result property="operateById" column="operate_by_id" />
+        <result property="operateTime" column="operate_time" />
+        <result property="description" column="description" />
+        <result property="logAmount" column="log_amount" />
+    </resultMap>
+
+    <select id="findTaskOperateLogList" resultMap="taskOperateLogItemDtoMap">
+        select id, op_type, task_id, operate_by_id, operate_time, description from tm_task_operate_log
+        <where>
+            <if test="id!=null and id.size()>0">
+                and id in
+                <foreach collection="id" item="i" open="(" separator="," close=")">
+                    #{i}
+                </foreach>
+            </if>
+            <if test="taskId!=null and taskId.size()>0">
+                and task_id in
+                <foreach collection="taskId" item="i" open="(" separator="," close=")">
+                    #{i}
+                </foreach>
+            </if>
+            <if test="operateById!=null and operateById.size()>0">
+                and operate_by_id in
+                <foreach collection="operateById" item="i" open="(" separator="," close=")">
+                    #{i}
+                </foreach>
+            </if>
+            and tenant_id=#{tenantId}
+        </where>
+        order by operate_time desc
+    </select>
+
+    <select id="findTaskOperateLogWithTaskList" resultMap="taskOperateLogWithTaskItemDtoMap">
+        select lg.id, lg.tenant_id, lg.op_type, lg.task_id, lg.operate_by_id, lg.operate_time, lg.description,
+        count(lg2.id) as log_amount
+        from tm_task_operate_log lg
+        inner join tm_task_operate_log lg2 on lg.task_id=lg2.task_id and lg.tenant_id=lg2.tenant_id
+        inner join tm_task_operate_log_staff_link lk on lk.staff_id=#{staffId} and lg.id=lk.operate_log_id and lg.task_id=lk.task_id and lg.tenant_id=lk.tenant_id
+        inner join tm_task task on lg.task_id=task.id and task.archived=0 and task.deleted_flag=0
+        <if test="readed!=null">
+            and lk.readed=#{readed}
+        </if>
+        where lg.id in (
+        select t.id from (select log.id as id,
+            row_number() over(partition by log.task_id, lnk.staff_id order by operate_time desc) as row_no
+        from tm_task_operate_log log
+        inner join tm_task_operate_log_staff_link lnk  on lnk.staff_id=#{staffId} and log.id=lnk.operate_log_id and log.task_id=lnk.task_id and log.tenant_id=lnk.tenant_id)
+        t where t.row_no=1
+        ) and lg.tenant_id=#{tenantId}
+        group by lg.id, lg.tenant_id, lg.op_type, lg.task_id, lg.operate_by_id, lg.operate_time, lg.description, lk.sort_no
+        order by lk.sort_no asc, lg.operate_time desc
+    </select>
+</mapper>

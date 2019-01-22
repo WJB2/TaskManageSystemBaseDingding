@@ -1,0 +1,130 @@
+.page {
+
+  background-color: rgb(242, 245, 247);
+  min-height: 100%;
+
+  .header{
+
+    background-color: #fff;
+
+    .searchText {
+      margin-right: 16px;
+      width:180px;
+    }
+
+    .exportExcel{
+      margin-right: 16px;
+    }
+  }
+
+  .conditionContainer{
+
+    border-bottom: 1px solid #e8e8e8;
+    padding-top:8px;
+    padding-bottom: 8px;
+
+    .tabItem{
+      float: left;
+      height: 48px;
+      line-height: 48px;
+      width: 80px;
+      margin-left: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: -8px;
+      text-align: center;
+    }
+
+    .tabItemSelected, .tabItem:hover{
+      border-bottom: 3px solid red;
+    }
+
+    .searchItem{
+      width:160px;
+      margin-left: 8px;
+    }
+
+    .right{
+      display: inline-block;
+      float: right;
+      margin-right: 8px;
+      height:32px;
+      line-height: 32px;
+    }
+  }
+
+  .extraConditionContainer{
+    padding:8px;
+
+    .searchItemWrapper{
+      margin-top: 8px;
+    }
+
+    .searchLabel{
+      text-align: right;
+      width: 80px;
+      height: 32px;
+      line-height: 32px;
+    }
+  }
+
+}
+
+.taskForm{
+  width:720px;
+  background-color: #fff;
+  flex-direction: column;
+  border-left: 1px solid  #e8e8e8;
+  padding:0px;
+
+  :global(.ant-modal-content){
+    box-shadow: 0 0 #fff;
+    height: 100%;
+  }
+
+  .primaryBtnItem{
+    float:left;
+    margin-right: 16px;
+    cursor : pointer;
+  }
+
+  .formWrapper{
+    width: 100%;
+    height:100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .formHeader{
+    height: 50px;
+    background-color: #fff;
+    line-height: 50px;
+    border-bottom: 1px solid #e8e8e8;
+  }
+
+  .formBodyWrapper{
+    flex:1;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .formBody{
+    position: absolute;
+    padding:8px;
+    width:100%;
+    height: 100%;
+    overflow: auto;
+  }
+
+  .formFooter{
+    height: 60px;
+    width: 100%;
+    border-top: 1px solid #EFEFEF;
+    padding-top: 16px;
+  }
+
+  :global(.ant-form-item-label){
+    height: 32px;
+    line-height: 32px;
+  }
+}

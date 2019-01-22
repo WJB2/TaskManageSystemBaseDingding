@@ -1,0 +1,76 @@
+@import '../../styles/default.less';
+
+.tagadd{
+  .pos(a);
+  top:0;
+  left:0;
+  .widthandheight(100%,calc(100% - 1.2rem),normal);
+  background-color:@colorP;
+  z-index:20;
+
+  .navbar{
+    .pos(f);
+    .widthandheight(100%,1.2rem,1.2rem);
+    top:0px;
+    background-color:#3A4479;
+    z-index:1;
+    div{
+      display:inline;
+      font-size:16px;
+      color:#fff;
+    }
+    :nth-child(1){
+      margin:0 0.3rem;
+    }
+    :nth-child(3){
+      margin:0 2.7rem;
+    }
+  }
+
+  .taggreyline{
+    .greyline;
+  }
+
+  .tagsave{
+    .widthandheight(100%,1.5rem,1.5rem);
+    background-color:@colorI;
+    color:@colorB;
+    .pos(f);
+    z-index:10;
+    bottom:0;
+    text-align:center;
+  }
+
+  .tagcolorball{
+    .widthandheight(0.5rem,0.5rem,0.5rem);
+    display:inline-block;
+    border-radius:50%;
+    margin-right:0.5rem;
+
+  }
+
+  .editbutton{
+    .pos(f);
+    bottom:0;
+    .widthandheight(100%,1.5rem,1.5rem);
+    font-size:0.4rem;
+    text-align:center;
+    z-index:10;
+
+    :nth-child(1){
+      display:inline-block;
+      width:50%;
+      color:@colorB;
+      background-color:@colorI;
+    }
+
+    :nth-child(2){
+      display:inline-block;
+      width:50%;
+      color:@colorI;
+      background-color:@colorB;
+    }
+
+  }
+
+}

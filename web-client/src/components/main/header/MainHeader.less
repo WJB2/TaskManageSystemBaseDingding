@@ -1,0 +1,41 @@
+@import '~antd/lib/style/themes/default.less';
+@import './../../../index.less';
+
+.header {
+  padding: 0;
+  background-color: @header_color;
+  height: @header_height;
+  line-height: @header_height;
+  color: #fff;
+}
+
+.item {
+  font-size: 16px;
+  cursor: pointer;
+  padding-left: 15px;
+  padding-right: 15px;
+  height: @header_height;
+  text-align: center;
+  display: inline-block;
+}
+
+.item:hover {
+  background-color: rgb(0, 151, 167);
+}
+
+.left {
+  display: inline-block;
+
+  .item {
+    margin-right: 4px;
+  }
+}
+
+.right {
+  float: right;
+  height: 100%;
+
+  .item {
+    margin-left: 4px;
+  }
+}

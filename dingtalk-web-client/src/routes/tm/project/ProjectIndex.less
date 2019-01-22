@@ -1,0 +1,88 @@
+.page {
+
+  background-color: rgb(242, 245, 247);
+  min-height: 100%;
+
+  .header{
+
+    background-color: #fff;
+
+    .searchText {
+      margin-right: 16px;
+      width:180px;
+    }
+  }
+
+  .conditionContainer{
+
+    border-bottom: 1px solid gray;
+    padding-top:8px;
+    padding-bottom: 8px;
+
+    .tabItem{
+      float: left;
+      height: 48px;
+      line-height: 48px;
+      width: 80px;
+      margin-left: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: -8px;
+      text-align: center;
+    }
+
+    .tabItemSelected, .tabItem:hover{
+      border-bottom: 3px solid red;
+    }
+
+    .searchItem{
+      width:160px;
+      margin-left: 8px;
+    }
+
+    .right{
+      display: inline-block;
+      float: right;
+      margin-right: 8px;
+      height:32px;
+      line-height: 32px;
+    }
+  }
+
+}
+
+.taskForm{
+  width:720px;
+  height:100%;
+  background-color: #fff;
+  position: absolute;
+  right: 0px;
+  top:0px;
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid gray;
+
+  .formHeader{
+    height: 50px;
+    background-color: #fff;
+    line-height: 50px;
+    border-bottom: 1px solid gray;
+  }
+
+  .formBody{
+    flex:1;
+    padding:8px;
+  }
+
+  .formFooter{
+    height: 50px;
+    background-color: #fff;
+    border-top:1px solid gray;
+    line-height: 50px;
+
+    .button{
+      width: 45%;
+      margin-left:3%;
+    }
+  }
+}

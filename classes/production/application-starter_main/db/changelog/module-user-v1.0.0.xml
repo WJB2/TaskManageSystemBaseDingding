@@ -1,0 +1,114 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+ 
+	<changeSet id="create_uc_user" author="zhujingjun">
+		<comment>创建系统用户表</comment>
+		<createTable tableName="uc_user">
+			<column name="id" type="VARCHAR(32)" remarks="ID">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="username" type="VARCHAR(32)" remarks="用户名">
+				<constraints nullable="true"/>
+			</column>
+			<column name="mobile" type="VARCHAR(20)" remarks="手机号">
+				<constraints nullable="true"/>
+			</column>
+			<column name="email" type="VARCHAR(128)" remarks="电子邮箱">
+				<constraints nullable="true"/>
+			</column>
+			<column name="password" type="VARCHAR(1024)" remarks="密码">
+				<constraints nullable="false"/>
+			</column>
+			<column name="salt" type="VARCHAR(128)" remarks="密码加密盐值">
+				<constraints nullable="false"/>
+			</column>
+			<column name="status" type="NUMERIC(2, 0)" remarks="用户状态">
+				<constraints nullable="false"/>
+			</column>
+		</createTable>
+		<rollback>
+			<sql>
+				drop table uc_user
+			</sql>
+		</rollback>
+	</changeSet>
+	
+	<changeSet id="create_uc_user_username" author="zhujingjun">
+		<comment>创建用户名表</comment>
+		<createTable tableName="uc_user_username">
+			<column name="id" type="VARCHAR(32)" remarks="ID">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="username" type="VARCHAR(32)" remarks="用户名">
+				<constraints unique="true" nullable="false"/>
+			</column>
+		</createTable>
+		<rollback>
+			<sql>
+				drop table uc_user_username
+			</sql>
+		</rollback>
+	</changeSet>
+	
+	<changeSet id="create_uc_user_mobile" author="zhujingjun">
+		<comment>创建用户手机号表</comment>
+		<createTable tableName="uc_user_mobile">
+			<column name="id" type="VARCHAR(32)" remarks="ID">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="mobile" type="VARCHAR(20)" remarks="手机号">
+				<constraints unique="true" nullable="false"/>
+			</column>
+		</createTable>
+		<rollback>
+			<sql>
+				drop table uc_user_mobile
+			</sql>
+		</rollback>
+	</changeSet>
+	
+	<changeSet id="create_uc_user_email" author="zhujingjun">
+		<comment>创建用户邮箱表</comment>
+		<createTable tableName="uc_user_email">
+			<column name="id" type="VARCHAR(32)" remarks="ID">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="email" type="VARCHAR(128)" remarks="电子邮箱">
+				<constraints unique="true" nullable="false"/>
+			</column>
+		</createTable>
+		<rollback>
+			<sql>
+				drop table uc_user_email
+			</sql>
+		</rollback>
+	</changeSet>
+	
+	<changeSet id="create_uc_user_tenant_link" author="zhujingjun">
+		<comment>创建用户与租户关系表</comment>
+		<createTable tableName="uc_user_tenant_link">
+			<column name="id" type="VARCHAR(32)" remarks="ID">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="user_id" type="VARCHAR(32)" remarks="用户ID">
+				<constraints nullable="false"/>
+			</column>
+			<column name="tenant_id" type="VARCHAR(32)" remarks="租户ID">
+				<constraints nullable="false"/>
+			</column>
+			<column name="is_primary" type="NUMERIC(2)" remarks="是否默认租户">
+				<constraints nullable="false"/>
+			</column>
+		</createTable>
+		<rollback>
+			<sql>
+				drop table uc_user_tenant_link
+			</sql>
+		</rollback>
+	</changeSet>
+
+ </databaseChangeLog>

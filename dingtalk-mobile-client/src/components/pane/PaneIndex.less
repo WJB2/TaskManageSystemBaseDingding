@@ -1,0 +1,617 @@
+@import '../../styles/default.less';
+
+.filePane{//filePane
+
+  width:100%;
+  min-height:1rem;
+  background-color:#fff;
+
+  //:global{
+  //
+  //  .am-image-picker{
+  //    padding:0!important;
+  //    margin:0!important;
+  //    min-height:3rem!important;
+  //  }
+  //
+  //  .am-image-picker-list{
+  //    padding:0!important;
+  //    margin:0!important;
+  //    min-height:3rem!important;
+  //  }
+  //
+  //  .am-image-picker-list .am-flexbox{
+  //    padding:0!important;
+  //    margin:0!important;
+  //    height:3rem!important;
+  //  }
+  //
+  //  .am-image-picker-list .am-flexbox .am-flexbox-item{
+  //    padding:0!important;
+  //    margin:0!important;
+  //    height:80%!important;
+  //  }
+  //
+  //  .am-image-picker-list .am-image-picker-item{
+  //    height:100%!important;
+  //  }
+  //}
+}
+
+.filterPane{
+
+  height:100%;
+  width:100%;
+  z-index:11;
+  position:fixed;
+  background-color:#fff;
+
+}
+
+.groupPane{
+
+  position:fixed;
+  top:0;
+  width:100%;
+  height:100%;
+  left:0;
+  z-index:10;
+
+  .groupPaneLeft{
+
+    position:absolute;
+    left:0;
+    width:20%;
+    height:100%;
+    background-color:@colorG;
+    margin:auto;
+    opacity:0.2;
+    color:@colorB;
+    text-align: center;
+    font-size:2rem;
+
+  }
+
+  .groupPaneRight{
+
+    position:absolute;
+    margin-left:20%;
+    background-color:@colorB;
+    width:80%;
+    width:100%;
+
+    .groupPaneText{
+
+      width:100%;
+      height:1rem;
+      background-color:@colorH;
+      padding-left:0.5rem;
+
+    }
+
+    .groupPaneList{
+
+    }
+
+    .groupPaneButton{
+
+      position:absolute;
+      bottom:0.2rem;
+      width:95%;
+      height:1rem;
+      line-height:1rem;
+      background-color:@colorI;
+      color:@colorB;
+      box-sizing:border-box;
+      border-radius:4px;
+      text-align:center;
+
+    }
+
+  }
+}
+
+.organizationPane{//部门选择面板
+
+  background-color:@colorA;
+  width:100%;
+  height:100%;
+  position:fixed;
+  top:0;
+  z-index:10;
+
+
+  .organizationPaneContent{//内容部
+
+    background-color:@colorC;
+    position:absolute;
+    width:100%;
+    top:0;
+
+    .organizationPaneText{
+
+      width:100%;
+      height:1.2rem;
+      line-height:1.2rem;
+      color:#A4A5A9;
+      position:absolute;
+      font-size:0.4rem;
+      background-color:@colorB;
+      padding-left:0.5rem;
+      box-shadow:1px 1px 1px 1px #ddd;
+
+    }
+
+    .organizationPaneGrey{
+
+      .greyline;
+      position:absolute;
+      top:1.2rem;
+    }
+
+    .organizationPaneList{
+
+      width:100%;
+      background-color:@colorB;
+      top:1.5rem;
+      position:absolute;
+
+
+      .organizationPaneSection{
+
+        width:100%;
+        height:1.5rem;
+        display:flex;
+        align-items:center;
+        font-size:0.4rem;
+        box-sizing:border-box;
+
+
+        .organization{
+          color:grey;
+          width:80%;
+          padding-left:0.5rem;
+
+          box-sizing:border-box;
+        }
+
+        .organizationPaneInsection{
+
+          flex:1;
+          border-left:1px solid #ddd;
+          height:100%;
+          display:flex;
+          align-items:center;
+          color:@colorC;
+
+          :nth-child(1){
+            font-size:0.6rem;
+            padding-left:0.2rem;
+          }
+
+        }
+      }
+    }
+  }
+}
+
+._organizationPane{//部门选择面板
+
+  background-color:@colorA;
+  width:100%;
+  height:100%;
+  position:fixed;
+  top:0;
+  z-index:10;
+
+  ._organizationPaneContent{//内容部
+
+    background-color:@colorC;
+    position:absolute;
+    width:100%;
+    top:0;
+
+    ._organizationPaneText{
+
+      width:100%;
+      height:1.2rem;
+      line-height:1.2rem;
+      color:#A4A5A9;
+      position:absolute;
+      background-color:@colorB;
+      padding-left:0.5rem;
+
+    }
+
+    ._organizationPaneGrey{
+
+      .greyline;
+      position:absolute;
+      top:1.2rem;
+
+    }
+
+    ._organizationPaneList{
+
+      position:absolute;
+      top:1.5rem;
+      width:100%;
+
+      ._organizationPaneSection{
+
+        width:100%;
+        height:1.2rem;
+        line-height:1.2rem;
+        background-color:@colorB;
+        border-bottom:1px solid #DDDDDD;
+        padding-left:0.5rem;
+        display:inline-block;
+        position:relative;
+
+        ._organizationPaneInsection{
+
+          position:absolute;
+          border-left:1px solid #DDDDDD;
+          right:0.2rem;
+          color:@colorC;
+          display:inline-block;
+
+          :nth-child(1){
+            display:inline-block;
+          }
+        }
+      }
+    }
+
+    ._blankOrganizationPane{
+      .widthandheight(100%,calc(100% - 1.5rem),10rem);
+      position:absolute;
+      top:1.5rem;
+      text-align:center;
+
+      :nth-child(1){
+        display:inline-block;
+        font-size:5rem;
+        color:#DDDDDD;
+      }
+
+    }
+  }
+}
+
+.projectPane{//项目选择面板
+
+  position:fixed;
+  top:0;
+  width:100%;
+  height:100%;
+  left:0;
+  z-index:20;
+
+
+  .projectPaneLeft{
+
+    position:absolute;
+    left:0;
+    width:20%;
+    height:100%;
+    line-height:15rem;
+    background-color:@colorG;
+    margin:auto;
+    opacity:0.2;
+    color:@colorB;
+    text-align: center;
+    font-size:2rem;
+
+  }
+
+  .projectPaneRight{
+
+    position:absolute;
+    margin-left:20%;
+    background-color:@colorB;
+    width:80%;
+    height:100%;
+    z-index:12;
+
+    .projectPaneText{
+
+      width:100%;
+      height:1rem;
+      line-height:1rem;
+      background-color:@colorH;
+      padding-left:0.5rem;
+
+    }
+
+    .projectPaneList{
+
+    }
+
+    .projectPaneButton{
+
+      position:absolute;
+      bottom:0.2rem;
+      width:96%;
+      height:1rem;
+      line-height:1rem;
+      background-color:@colorI;
+      left:2.5%;
+      right:2.5%;
+      color:@colorB;
+      box-sizing:border-box;
+      border-radius:4px;
+      text-align:center;
+
+    }
+  }
+}
+
+.staffPane{//人员选择面板第一页
+
+  :global{
+    .am-list-item .am-input-label.am-input-label-5{
+      width:0.6rem;
+    }
+  }
+
+  background-color:@colorA;
+  width:100%;
+  height:100%;
+  position:fixed;
+  top:0;
+  z-index:20;
+  left:0;
+  bottom:0;
+
+  .staffPaneContent{
+
+    background-color:@colorB;
+    position:absolute;
+    top:0;
+    width:100%;
+    bottom:1.5rem;
+    left:0;
+
+    .staffPaneInput{
+
+      background-color:@colorD;
+      position:absolute;
+      width:96%;
+      height:1.1rem;
+      line-height:1.1rem;
+      margin-left:2%;
+
+
+    }
+
+    .staffPaneText{
+
+      width:90%;
+      height:1.2rem;
+      line-height:1.2rem;
+      color:#A4A5A9;
+      position:absolute;
+      top:1.2rem;
+      left:0.5rem;
+      font-size:0.4rem;
+
+    }
+
+    .staffPaneGrey{
+
+      .greyline;
+      position:absolute;
+      top:2.4rem;
+
+    }
+
+    .staffPaneCheckbox{
+
+      position:absolute;
+      top:2.7rem;
+      width:100%;
+      -webkit-overflow-scrolling:touch;
+      overflow:auto;
+
+
+    }
+
+  }
+
+  .staffPaneFooter{//尾部
+
+
+    background-color:@colorB;
+    width:100%;
+    height:1.5rem;
+    line-height:1.5rem;
+    position:fixed;
+    bottom:0;
+    z-index:10;
+    border-top:1px solid #DDDDDD;
+    display:flex;
+    align-items:center;
+
+    :nth-child(1){
+      color:@colorF;
+      font-size:0.4rem;
+      .widthandheight(3rem,1.5rem,1.5rem);
+      padding-left:0.4rem;
+      display:inline-block;
+    }
+
+    :nth-child(2){
+
+      display:inline-block;
+      color:@colorB;
+      .widthandheight(3rem,1rem,normal);
+      padding:0.27rem 0.35rem;
+      background-color:@colorF;
+      border-radius:5px;
+      box-sizing:border-box;
+      .pos(a);
+      right:0.5rem;
+      font-size:0.4rem;
+
+    }
+  }
+
+}
+
+.tagPane{//标签面板
+
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  z-index:20;
+
+  .tagPaneLeft{
+
+    position:fixed;
+    left:0;
+    width:20%;
+    height:100%;
+    line-height:15rem;
+    background-color:@colorG;
+    margin:auto;
+    opacity:0.2;
+    color:@colorB;
+    text-align: center;
+    font-size:2rem;
+    z-index:20;
+
+  }
+
+  .tagPaneRight{
+
+    position:fixed;
+    margin-left:20%;
+    background-color:@colorB;
+    width:80%;
+    height:100%;
+    z-index:20;
+
+    .tagPaneSystem{
+
+      width:100%;
+      height:1rem;
+      line-height:1rem;
+      background-color:@colorH;
+      padding-left:0.5rem;
+
+    }
+
+    .tagPaneList{
+
+      span{
+        .widthandheight(0.2rem,0.2rem,0);
+        border-radius:0.1rem;
+      }
+
+    }
+
+    .tagPaneButton{
+
+      position:absolute;
+      bottom:0.2rem;
+      width:95%;
+      height:1rem;
+      line-height:1rem;
+      background-color:@colorI;
+      left:2.5%;
+      color:@colorB;
+      box-sizing:border-box;
+      border-radius:4px;
+      text-align:center;
+      z-index:20;
+
+    }
+  }
+
+}
+
+.templatePane{//模板页面
+
+  position:fixed;
+  width:100%;
+  height:100%;
+  z-index:10;
+  left:0;
+  top:0;
+  background-color:@colorB;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:space-around;
+  padding-top:1rem;
+
+  .templatePaneCardOne{
+
+    width:45%;
+    height:3rem;
+    flex-shrink:0;
+    flex-grow:0;
+    box-sizing: border-box !important;
+    border:2px solid @colorK;
+    border-radius:3px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+  }
+
+  .templatePaneCardTwo{
+
+    width:45%;
+    height:3rem;
+    box-sizing: border-box !important;
+    border-radius:3px;
+    border:2px solid @colorK;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+  }
+
+  .templatePaneCardThree{
+    width:45%;
+    height:3rem;
+    box-sizing: border-box !important;
+    border-radius:3px;
+    border:2px solid @colorK;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    background-color:@colorL;
+    position:relative;
+    bottom:2rem;
+    right:2.5rem;
+
+  }
+
+  .templatePaneButton{
+    width:96%;
+    height:1rem;
+    background-color:@colorI;
+    color:@colorB;
+    border-radius:5px;
+    text-align:center;
+    position:relative;
+    bottom:3rem;
+    padding-top:0.2rem;
+    box-sizing:border-box;
+  }
+}
+
+
+
+
+
+
+
+
+
+

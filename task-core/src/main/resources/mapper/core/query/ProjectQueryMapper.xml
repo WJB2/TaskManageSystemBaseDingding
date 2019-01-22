@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hozensoft.task.core.dao.query.ProjectQuery">
+
+    <resultMap id="projectDtoMap" type="com.hozensoft.task.core.dto.ProjectDto">
+        <id property="id" column="id"/>
+        <result property="tenantId" column="tenant_id"/>
+        <result property="name" column="name"/>
+        <result property="description" column="description"/>
+        <result property="beginTime" column="begin_time"/>
+        <result property="endTime" column="end_time"/>
+        <result property="label" column="label"/>
+        <result property="deletedFlag" column="deleted_flag"/>
+        <result property="createdById" column="created_by_id"/>
+        <result property="createdOrgId" column="created_org_id"/>
+        <result property="createdTime" column="created_time"/>
+        <result property="updatedById" column="updated_by_id"/>
+        <result property="updatedOrgId" column="updated_org_id"/>
+        <result property="updatedTime" column="updated_time"/>
+        <result property="deletedById" column="deleted_by_id"/>
+        <result property="deletedOrgId" column="deleted_org_id"/>
+        <result property="deletedTime" column="deleted_time"/>
+    </resultMap>
+
+    <resultMap id="projectItemDtoMap" type="com.hozensoft.task.core.dto.ProjectItemDto">
+        <id property="id" column="id"/>
+        <result property="tenantId" column="tenant_id"/>
+        <result property="name" column="name"/>
+        <result property="description" column="description"/>
+        <result property="beginTime" column="begin_time"/>
+        <result property="endTime" column="end_time"/>
+        <result property="label" column="label"/>
+        <result property="deletedFlag" column="deleted_flag"/>
+        <result property="taskCounts" column="task_counts" />
+        <result property="finishedTaskCounts" column="finished_task_counts" />
+        <result property="unfinishedTaskCounts" column="unfinished_task_counts" />
+    </resultMap>
+
+
+    <sql id="selectProjectDtoPart">
+        select pj.id as id, pj.tenant_id as tenant_id, pj.name as name, pj.description as description,
+        pj.begin_time as begin_time, pj.end_time as end_time, pj.label as label, pj.deleted_flag as deleted_flag,
+        pj.created_by_id as created_by_id, pj.created_org_id as created_org_id, pj.created_time as created_time,
+        pj.updated_by_id as updated_by_id, pj.updated_org_id as updated_org_id, pj.updated_time as updated_time,
+        pj.deleted_by_id as deleted_by_id, pj.deleted_org_id as deleted_org_id, pj.deleted_time as deleted_time
+        from tm_project as pj
+    </sql>
+
+    <sql id="selectProjectItemDtoPart">
+        select pj.id as id, pj.tenant_id as tenant_id, pj.name as name, pj.description as description,
+        pj.begin_time as begin_time, pj.end_time as end_time, pj.label as label, pj.deleted_flag as deleted_flag,
+        count(tm.id) as task_counts,
+        sum(case tm.completed when 1 then 1 else 0 end ) as finished_task_counts,
+        sum(case tm.completed when 0 then 1 else 0 end ) as unfinished_task_counts
+        from tm_project as pj
+        left join tm_task  tm on pj.id = tm.project_id and tm.deleted_flag=0
+    </sql>
+
+    <sql id="whereClause">
+        <where>
+            <if test="tenantId!=null">
+              pj.tenant_id = #{tenantId}
+            </if>
+            <if test="name!=null">
+              and  pj.name like '%'||#{name}||'%'
+            </if>
+            <if test="deletedFlag!=null">
+              and  pj.deleted_flag = #{deletedFlag,jdbcType=NUMERIC}
+            </if>
+        </where>
+    </sql>
+
+    <select id="findProjectById" resultMap="projectDtoMap">
+        <include refid="selectProjectDtoPart"/>
+        where pj.id = #{projectId}
+    </select>
+
+    <select id="findProjectList" resultMap="projectItemDtoMap">
+        <include refid="selectProjectItemDtoPart"/>
+        <include refid="whereClause"/>
+        group by pj.id, pj.tenant_id, pj.name, pj.description, pj.begin_time, pj.end_time, pj.label,
+        pj.deleted_flag
+
+        <if test="sortBy=='NAME_ASC'">
+          order by pj.name asc, pj.id asc
+        </if>
+        <if test="sortBy=='NAME_DESC'">
+            order by pj.name desc, pj.id asc
+        </if>
+        <if test="sortBy=='TIME_ASC'">
+            order by pj.end_time asc, pj.id asc
+        </if>
+        <if test="sortBy=='TIME_DESC'">
+            order by pj.end_time desc, pj.id asc
+        </if>
+    </select>
+</mapper>

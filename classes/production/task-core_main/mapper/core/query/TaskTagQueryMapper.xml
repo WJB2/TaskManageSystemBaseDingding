@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hozensoft.task.core.dao.query.TaskTagQuery">
+    <resultMap id="taskTagDtoMap" type="com.hozensoft.task.core.dto.TaskTagDto">
+        <id property="id" column="id"/>
+        <result property="tenantId" column="tenant_id"/>
+        <result property="tagType" column="tag_type"/>
+        <result property="name" column="name"/>
+        <result property="orgId" column="org_id"/>
+        <result property="staffId" column="staff_id"/>
+    </resultMap>
+
+    <resultMap id="taskTagItemDtoMap" type="com.hozensoft.task.core.dto.TaskTagItemDto">
+        <id property="id" column="id"/>
+        <result property="tenantId" column="tenant_id"/>
+        <result property="tagType" column="tag_type"/>
+        <result property="name" column="name"/>
+    </resultMap>
+
+    <sql id="selectTaskTagDtoPart">
+        select tt.id as id, tt.tenant_id as tenant_id, tt.tag_type as tag_type, tt.name as name,
+        tt.org_id as org_id, tt.staff_id as staff_id
+        from tm_task_tag as tt
+    </sql>
+
+    <sql id="selectTaskTagItemDtoPart">
+         select tt.id as id, tt.tenant_id as tenant_id, tt.tag_type as tag_type, tt.name as name
+        from tm_task_tag as tt
+    </sql>
+
+    <sql id="whereClause">
+        <where>
+            <if test="id != null and id.size()>0">
+                and tt.id in
+                <foreach collection="id" item="i" separator="," open="(" close=")">
+                    #{i}
+                </foreach>
+            </if>
+            <if test="tenantId != null">
+                and tt.tenant_id = #{tenantId}
+            </if>
+            <if test="name != null">
+                and tt.name = #{name}
+            </if>
+        </where>
+    </sql>
+
+    <select id="findTaskTagById" resultMap="taskTagDtoMap">
+        <include refid="selectTaskTagDtoPart"/>
+        where id=#{taskTagId}
+    </select>
+
+
+    <select id="findTaskTagList" resultMap="taskTagItemDtoMap">
+        <include refid="selectTaskTagItemDtoPart"/>
+        <include refid="whereClause"/>
+    </select>
+</mapper>

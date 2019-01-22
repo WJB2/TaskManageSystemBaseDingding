@@ -1,0 +1,786 @@
+@import '../../styles/default.less';
+
+.assigneeSelector{//任务部分的负责人选择面板
+
+  display:-webkit-flex;
+  display:-webkit-box;
+  display:flex;
+  -webkit-box-align:center;
+  -webkit-align-items:center;
+  position:relative;
+  align-items:center;
+  height:1.5rem;
+
+  border:1px solid #DDD;
+  box-shadow:1px 1px 1px 1px #DDD;
+
+  background-color:@colorB;
+  box-sizing:border-box;
+
+  .assigneeName{
+    width:2rem;
+    box-sizing:border-box;
+    font-size:0.45rem;
+    flex-shrink:0;
+    flex-grow:0;
+    display:inline-flex;
+  }
+
+  .assigneeRightLeft{
+    font-size:0.4rem;
+    flex:1;
+    box-sizing:border-box;
+
+  }
+
+  .assigneeMain{
+
+    display:inline-block;
+    overflow:auto;
+    -webkit-overflow-scrolling:touch;
+    white-space:nowrap;
+    vertical-align:middle;
+    flex:1;
+    text-align:right;
+
+      .assigneeStaffList{
+
+        width:1rem;
+        height:1rem;
+        border-radius:50px;
+        display:inline-block;
+        color:#FFF;
+        margin-left:0.2rem;
+        box-sizing:border-box;
+        text-align:center;
+        line-height:1rem;
+        border:1px solid #ddd;
+        vertical-align:middle;
+
+
+      }
+
+  }
+
+
+
+
+}
+
+.attachmentContent{
+
+
+  min-height:1.5rem;
+  box-shadow:1px 1px 1px 1px #DDD;
+  background-color:@colorB;
+  padding-bottom:0.1rem;
+
+  .attachmentSelector{//任务部分的负责人选择面板
+
+    display:-webkit-flex;
+    display:-webkit-box;
+    display:flex;
+    -webkit-box-align:center;
+    -webkit-align-items:center;
+    position:relative;
+    align-items:center;
+    height:1.5rem;
+    width:100%;
+    border-left:1px solid #DDD;
+    border-right:1px solid #DDD;
+    border-top-left-radius:5px;
+    border-top-right-radius:5px;
+    box-sizing:border-box;
+
+    .attachmentName{
+      width:1.5rem;
+      box-sizing:border-box;
+      font-size:0.45rem;
+      flex-shrink:0;
+      flex-grow:0;
+    }
+
+    .attachmentMain{
+
+      width:6.5rem;
+      flex-grow:0;
+      flex-shrink:0;
+      display:flex;
+      justify-content:flex-end;
+
+      .attachmentRight{
+
+        width:2rem;
+        flex-grow:0;
+        flex-shrink:0;
+        display:flex;
+        align-items:center;
+
+        .attachmentRightLeft{
+          font-size:0.4rem;
+          width:1.5rem;
+          box-sizing:border-box;
+        }
+
+        :nth-child(2){
+          box-sizing:border-box;
+        }
+      }
+
+    }
+
+
+
+
+  }
+
+  .fileItem{
+
+    padding-left:0.2rem;
+    width:96%;
+    height:1rem;
+    margin:0.1rem auto;
+    background-color:#ddd;
+    border-radius:5px;
+    box-sizing:border-box;
+
+    img{
+      margin-top:0.2rem;
+      border-radius:5px;
+    }
+
+    .fileName{
+      display:inline-block;
+      position:relative;
+      bottom:0.15rem;
+      left:0.2rem;
+    }
+
+  }
+
+}
+
+.templateSelector{
+
+  width:96%;
+  height:1rem;
+  margin:0 auto;
+  border-top-left-radius:10px;
+  border-top-right-radius:10px;
+  background-color:#FBFBFB;
+  box-sizing:border-box;
+  position:relative;
+  box-shadow:1px 1px 1px 1px #ddd;
+  border-left:1px solid #ddd;
+  border-right:1px solid #ddd;
+  border-top:1px solid #ddd;
+
+  .templateName{
+
+    color:grey;
+    box-sizing:border-box;
+    position:absolute;
+    left:1.2rem;
+    bottom:0.25rem;
+
+  }
+
+}
+
+.groupSelector{//任务部分的负责人选择面板
+
+  display:-webkit-flex;
+  display:-webkit-box;
+  display:flex;
+  -webkit-box-align:center;
+  -webkit-align-items:center;
+  position:relative;
+  align-items:center;
+  height:1.5rem;
+  width:96%;
+  margin:0 auto;
+  border:1px solid #DDD;
+  box-shadow:0 0 0 0 #DDD;
+  border-radius:5px;
+  background-color:@colorB;
+  box-sizing:border-box;
+
+  .groupName{
+    width:1.5rem;
+    box-sizing:border-box;
+    font-size:0.45rem;
+    flex-shrink:0;
+    flex-grow:0;
+  }
+
+  .groupMain{
+
+    width:6.2rem;
+    flex-grow:0;
+    flex-shrink:0;
+    display:flex;
+    justify-content:flex-end;
+
+    .groupWrapper{
+
+      padding-left:0.3rem;
+      box-sizing:border-box;
+      background-color:black;
+      .borderRadius(100px);
+      border: 0 solid transparent;
+      font-size:0.4rem;
+      color:#fff;
+      .widthandheight(2rem,0.6rem,0.6rem);
+
+    }
+
+
+    .groupRight{
+
+      width:2rem;
+      flex-grow:0;
+      flex-shrink:0;
+      display:flex;
+      align-items:center;
+
+      .groupRightLeft{
+        font-size:0.4rem;
+        width:1.5rem;
+        box-sizing:border-box;
+      }
+
+      :nth-child(2){
+        box-sizing:border-box;
+      }
+    }
+  }
+}
+
+.imageSelector{
+
+  position:relative;
+  width:100%;
+  min-height:1rem;
+  background-color:#fff;
+
+
+  .imageItem{
+    margin-left:10px;
+    display:inline-block;
+  }
+
+  //.imagePane{
+  //  :global{
+  //
+  //    .am-image-picker{
+  //      padding:0!important;
+  //      margin:0!important;
+  //      min-height:3rem!important;
+  //    }
+  //
+  //    .am-image-picker-list{
+  //      padding:0!important;
+  //      margin:0!important;
+  //      min-height:3rem!important;
+  //    }
+  //
+  //    .am-image-picker-list .am-flexbox{
+  //      padding:0!important;
+  //      margin:0!important;
+  //      height:3rem!important;
+  //    }
+  //
+  //    .am-image-picker-list .am-flexbox .am-flexbox-item{
+  //      padding:0!important;
+  //      margin:0!important;
+  //      height:80%!important;
+  //    }
+  //
+  //    .am-image-picker-list .am-image-picker-item{
+  //      height:100%!important;
+  //    }
+  //  }
+  //}
+
+}
+
+.participatorSelector{//任务部分的负责人选择面板
+
+  display:-webkit-flex;
+  display:-webkit-box;
+  display:flex;
+  -webkit-box-align:center;
+  -webkit-align-items:center;
+  position:relative;
+  align-items:center;
+  height:1.5rem;
+  width:96%;
+  margin:0.1rem auto;
+  border:1px solid #DDD;
+  box-shadow:1px 1px 1px 1px #DDD;
+  border-radius:5px;
+  background-color:@colorB;
+  box-sizing:border-box;
+
+  .participatorSelectorName{
+    width:1.5rem;
+    box-sizing:border-box;
+    font-size:0.45rem;
+    flex-shrink:0;
+    flex-grow:0;
+  }
+
+  .participatorSelectorMain{
+
+    width:6.5rem;
+    flex-grow:0;
+    flex-shrink:0;
+    display:flex;
+    justify-content:flex-end;
+
+    .participatorSelectorWrapper{
+
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      position:relative;
+      white-space:nowrap;
+
+      .parstaffList{
+
+        width:1rem;
+        height:1rem;
+        border-radius:50px;
+        display:inline-block;
+        color:#FFF;
+        box-sizing:border-box;
+        text-align:center;
+        line-height:1rem;
+        border:1px solid #ddd;
+
+      }
+    }
+
+    .participatorSelectorRight{
+
+      width:2rem;
+      flex-grow:0;
+      flex-shrink:0;
+      display:flex;
+      align-items:center;
+
+      .participatorSelectorLeft{
+        font-size:0.4rem;
+        width:1.5rem;
+        box-sizing:border-box;
+      }
+
+      :nth-child(2){
+        box-sizing:border-box;
+      }
+    }
+
+  }
+}
+
+.projectSelector{//
+
+  display:-webkit-flex;
+  display:-webkit-box;
+  display:flex;
+  -webkit-box-align:center;
+  -webkit-align-items:center;
+  position:relative;
+  align-items:center;
+  height:1.5rem;
+
+  border:1px solid #DDD;
+  box-shadow:0 0 0 0 #DDD;
+
+  background-color:@colorB;
+  box-sizing:border-box;
+
+  .projectName{
+    width:1.5rem;
+    box-sizing:border-box;
+    font-size:0.45rem;
+    flex-shrink:0;
+    flex-grow:0;
+  }
+
+  .projectMain{
+
+    width:7rem;
+    flex-grow:0;
+    flex-shrink:0;
+    display:flex;
+    justify-content:flex-end;
+
+    .projectWrapper{
+
+      padding-left:0.3rem;
+      box-sizing:border-box;
+      background-color:black;
+      .borderRadius(100px);
+      border: 0 solid transparent;
+      font-size:0.4rem;
+      color:#fff;
+      .widthandheight(2rem,0.6rem,0.6rem);
+
+    }
+
+    .projectRight{
+
+      width:2rem;
+      flex-grow:0;
+      flex-shrink:0;
+      display:flex;
+      align-items:center;
+      padding-right:0.2rem;
+
+      .projectRightLeft{
+        font-size:0.4rem;
+        width:1.5rem;
+        box-sizing:border-box;
+      }
+
+      :nth-child(2){
+        box-sizing:border-box;
+      }
+
+    }
+  }
+}
+
+.projectStaffSelector{//任务部分的项目选择面板
+
+  :global{
+    .am-list-extra{
+      flex-basis:70%!important;
+    }
+  }
+  .projectStaffSelectorBlock{
+
+  }
+
+  .projectStaffSelectorTask{
+
+    .widthandheight(0.8rem,0.8rem,0.8rem);
+    .borderRadius(50%);
+    color:@colorB;
+    font-size:0.1rem;
+    float:right;
+  }
+}
+
+.sliderSelector{//进度条
+
+  display:flex;
+  height:1.5rem;
+  padding-right:0.5rem;
+  position:relative;
+  box-shadow:1px 1px 1px 1px #DDD;
+  background-color:@colorB;
+  align-items:center;
+  box-sizing:border-box;
+
+  :nth-child(1){
+
+    flex-shrink:0;
+    flex-grow:0;
+    padding-left:0.2rem;
+    font-size:0.6rem;
+    color:grey;
+    box-sizing:border-box;
+  }
+
+  .sliderSelectorName{
+
+    flex-shrink:0;
+    flex-grow:0;
+    box-sizing:border-box;
+    font-size:0.45rem;
+    padding-left:0.45rem;
+
+  }
+
+  .sliderSelectorMain{
+    width:5rem;
+    padding-left:0.5rem;
+  }
+
+  .sliderSelectorRight{
+
+    width:1.5rem;
+    color:#ddd;
+    position:absolute;
+    right:0;
+
+  }
+
+}
+
+.superSelector{//任务部分的负责人选择面板
+
+  display:-webkit-flex;
+  display:-webkit-box;
+  display:flex;
+  -webkit-box-align:center;
+  -webkit-align-items:center;
+  position:relative;
+  align-items:center;
+  height:1.5rem;
+  width:96%;
+  margin:0.1rem auto;
+  border:1px solid #DDD;
+  box-shadow:1px 1px 1px 1px #DDD;
+  border-radius:5px;
+  background-color:@colorB;
+  box-sizing:border-box;
+
+  .superSelectorName{
+    width:1.5rem;
+    box-sizing:border-box;
+    font-size:0.45rem;
+    flex-shrink:0;
+    flex-grow:0;
+  }
+
+  .superSelectorMain{
+
+    width:6.5rem;
+    flex-grow:0;
+    flex-shrink:0;
+    display:flex;
+    justify-content:flex-end;
+
+    .superSelectorWrapper{
+
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      position:relative;
+      white-space:nowrap;
+
+      .superSelectorList{
+
+        width:1rem;
+        height:1rem;
+        flex-shrink:0;
+        flex-grow:0;
+        border-radius:50px;
+        display:inline-block;
+        color:#FFF;
+        box-sizing:border-box;
+        text-align:center;
+        line-height:1rem;
+        border:1px solid #ddd;
+
+      }
+
+    }
+
+
+    .superSelectorRight{
+
+      width:2rem;
+      flex-grow:0;
+      flex-shrink:0;
+      display:flex;
+      align-items:center;
+
+      .superrightleft{
+        font-size:0.4rem;
+        width:1.5rem;
+        box-sizing:border-box;
+      }
+
+    }
+  }
+}
+
+.tagSelector{//任务部分的负责人选择面板
+
+  display:-webkit-flex;
+  display:-webkit-box;
+  display:flex;
+  -webkit-box-align:center;
+  -webkit-align-items:center;
+  position:relative;
+  align-items:center;
+  height:1.5rem;
+  width:96%;
+  margin:0.1rem auto;
+  border:1px solid #DDD;
+  box-shadow:1px 1px 1px 1px #DDD;
+  border-radius:5px;
+  background-color:@colorB;
+  box-sizing:border-box;
+  z-index:15;
+
+  .tagSelectorName{
+    width:1.5rem;
+    box-sizing:border-box;
+    font-size:0.45rem;
+    flex-shrink:0;
+    flex-grow:0;
+  }
+
+  .tagSelectorMain{
+
+    width:6.5rem;
+    flex-grow:0;
+    flex-shrink:0;
+    display:flex;
+    justify-content:flex-end;
+    align-items:center;
+
+    .tagSelectorRight{
+
+      width:2rem;
+      flex-grow:0;
+      flex-shrink:0;
+      display:flex;
+      align-items:center;
+
+      .tagSelectorRightLeft{
+        font-size:0.4rem;
+        width:1.5rem;
+        box-sizing:border-box;
+      }
+
+      :nth-child(2){
+        box-sizing:border-box;
+      }
+    }
+
+    .tagSelectorWrapper{
+
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      position:relative;
+      white-space:nowrap;
+
+      .tagSelectorList{
+
+        width:2rem;
+        height:0.5rem;
+        display:inline-block;
+        font-size:0.4rem;
+        color:#fff;
+        border-radius:10px;
+        box-sizing:border-box;
+        text-align:center;
+        line-height:0.5rem;
+        border:1px solid #ddd;
+        margin-right:0.5rem;
+
+
+      }
+
+    }
+
+  }
+
+}
+
+.typeSelector{
+
+  height:1.5rem;
+  background-color:#fff;
+  box-shadow:0 0 0 0 #DDD;
+  border:1px solid #DDD;
+  display:flex;
+  align-items:center;
+
+  .name{
+    width:1.5rem;
+    box-sizing:border-box;
+    font-size:0.45rem;
+    flex-shrink:0;
+    flex-grow:0;
+  }
+
+  .main{
+
+    flex:1;
+    box-sizing:border-box;
+
+    .arrow{
+
+      padding-left:4.5rem;
+      display:flex;
+      align-items:center;
+
+    }
+
+    .taskType{
+      margin-left:4rem;
+      width:2rem;
+      height:0.5rem;
+      text-align:center;
+      line-height:0.5rem;
+      border-radius:10px;
+      border:1px solid #ddd;
+      background-color:@colorI;
+      color:#fff;
+    }
+
+  }
+
+}
+
+.textareaCustom{//输入框
+  border:1px solid none;
+
+  :global{
+    .am-textarea-item{
+      border-bottom:none;
+    }
+  }
+  border-bottom:1px solid #DDDDDD!important;
+
+  .textareaStatus{
+    color:orange;
+  }
+}
+
+.discussIndex{
+
+  width:100%;
+  height:100%;
+  position:fixed;
+  z-index:20;
+  left:0;
+  top:0;
+  background-color:#f2f5f7;
+
+  .discussButton{
+
+    background-color:@colorI;
+    width:94%;
+    margin:0 auto;
+    height:1.2rem;
+    text-align:center;
+    line-height:1.2rem;
+    border-radius:5px;
+    color:#fff;
+    position:relative;
+    top:1rem;
+  }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

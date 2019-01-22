@@ -1,0 +1,506 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hozensoft.task.core.dao.query.TaskQuery">
+    <resultMap id="taskDtoMap" type="com.hozensoft.task.core.dto.TaskDto">
+        <id property="id" column="id"/>
+        <result property="tenantId" column="tenant_id"/>
+        <result property="projectId" column="project_id"/>
+        <result property="taskType" column="task_type"/>
+        <result property="title" column="title"/>
+        <result property="content" column="content"/>
+        <result property="ownerBonusPoints" column="owner_bonus_points"/>
+        <result property="assigneeBonusPoints" column="assignee_bonus_points"/>
+        <result property="participatorBonusPoints" column="participator_bonus_points"/>
+        <result property="progressStatus" column="progress_status"/>
+        <result property="beginTime" column="begin_time"/>
+        <result property="endTime" column="end_time"/>
+        <result property="completed" column="completed"/>
+        <result property="completedById" column="completed_by_id"/>
+        <result property="completedTime" column="completed_time"/>
+        <result property="audited" column="audited" />
+        <result property="auditedById" column="audited_by_id" />
+        <result property="auditedTime" column="audited_time" />
+        <result property="archived" column="archived"/>
+        <result property="archivedById" column="archived_by_id"/>
+        <result property="archivedTime" column="archived_time"/>
+        <result property="suspended" column="suspended"/>
+        <result property="suspendedById" column="suspended_by_id"/>
+        <result property="suspendedTime" column="suspended_time"/>
+        <result property="unreachable" column="unreachable" />
+        <result property="openTimes" column="open_times"/>
+        <result property="parentId" column="parent_id"/>
+        <result property="description" column="description"/>
+        <result property="deletedFlag" column="deleted_flag"/>
+        <result property="createdById" column="created_by_id"/>
+        <result property="createdOrgId" column="created_org_id"/>
+        <result property="createdTime" column="created_time"/>
+        <result property="updatedById" column="updated_by_id"/>
+        <result property="updatedOrgId" column="updated_org_id"/>
+        <result property="updatedTime" column="updated_time"/>
+        <result property="deletedById" column="deleted_by_id"/>
+        <result property="deletedOrgId" column="deleted_org_id"/>
+        <result property="deletedTime" column="deleted_time"/>
+    </resultMap>
+
+    <resultMap id="taskItemPart" type="com.hozensoft.task.core.dto.TaskItemDto">
+        <id property="id" column="id"/>
+        <result property="tenantId" column="tenant_id"/>
+        <result property="projectId" column="project_id"/>
+        <result property="taskType" column="task_type"/>
+        <result property="title" column="title"/>
+        <result property="content" column="content"/>
+        <result property="ownerBonusPoints" column="owner_bonus_points"/>
+        <result property="assigneeBonusPoints" column="assignee_bonus_points"/>
+        <result property="participatorBonusPoints" column="participator_bonus_points"/>
+        <result property="progressStatus" column="progress_status"/>
+        <result property="beginTime" column="begin_time"/>
+        <result property="endTime" column="end_time"/>
+        <result property="completed" column="completed"/>
+        <result property="completedById" column="completed_by_id"/>
+        <result property="completedTime" column="completed_time"/>
+        <result property="audited" column="audited" />
+        <result property="auditedById" column="audited_by_id" />
+        <result property="auditedTime" column="audited_time" />
+        <result property="archived" column="archived"/>
+        <result property="archivedById" column="archived_by_id"/>
+        <result property="archivedTime" column="archived_time"/>
+        <result property="suspended" column="suspended"/>
+        <result property="suspendedById" column="suspended_by_id"/>
+        <result property="suspendedTime" column="suspended_time"/>
+        <result property="unreachable" column="unreachable" />
+        <result property="openTimes" column="open_times"/>
+        <result property="parentId" column="parent_id"/>
+        <result property="description" column="description"/>
+        <result property="deletedFlag" column="deleted_flag"/>
+        <result property="createdById" column="created_by_id"/>
+        <result property="createdOrgId" column="created_org_id"/>
+        <result property="createdTime" column="created_time"/>
+        <result property="updatedById" column="updated_by_id"/>
+        <result property="updatedOrgId" column="updated_org_id"/>
+        <result property="updatedTime" column="updated_time"/>
+        <result property="deletedById" column="deleted_by_id"/>
+        <result property="deletedOrgId" column="deleted_org_id"/>
+        <result property="deletedTime" column="deleted_time"/>
+    </resultMap>
+
+    <resultMap id="taskCountsDtoMap" type="com.hozensoft.task.core.dto.TaskCountsDto">
+        <result property="unbegin" column="unbegin" />
+        <result property="underway" column="underway" />
+        <result property="expired" column="expired" />
+    </resultMap>
+
+    <resultMap id="taskAssigneeReportDto" type="com.hozensoft.task.core.dto.TaskAssigneeReportDto">
+        <id property="assigneeId" column="assignee_id" />
+        <result property="incomplete" column="incomplete" />
+        <result property="incompleteUnderway" column="incomplete_underway" />
+        <result property="incompleteExpired" column="incomplete_expired" />
+        <result property="completed" column="completed" />
+        <result property="completedBefore" column="completed_before" />
+        <result property="completedAfter" column="completed_after" />
+        <result property="archived" column="archived" />
+        <result property="assigneeBonusPoints" column="assignee_bonus_points" />
+        <result property="participatorBonusPoints" column="participator_bonus_points" />
+        <result property="ownerBonusPoints" column="owner_bonus_points" />
+    </resultMap>
+
+    <resultMap id="taskProjectReportDto" type="com.hozensoft.task.core.dto.TaskProjectReportDto">
+        <id property="projectId" column="project_id" />
+        <result property="incomplete" column="incomplete" />
+        <result property="incompleteUnderway" column="incomplete_underway" />
+        <result property="incompleteExpired" column="incomplete_expired" />
+        <result property="completed" column="completed" />
+        <result property="completedBefore" column="completed_before" />
+        <result property="completedAfter" column="completed_after" />
+        <result property="archived" column="archived" />
+    </resultMap>
+    
+    <sql id="selectTaskDtoPart">
+        select ts.id as id, ts.tenant_id as tenant_id, ts.project_id as project_id, ts.task_type as task_type,
+        ts.title as title, ts.content as content, ts.owner_bonus_points as owner_bonus_points, ts.assignee_bonus_points as assignee_bonus_points,
+        ts.participator_bonus_points as participator_bonus_points, ts.progress_status as progress_status,
+        ts.begin_time as begin_time, ts.end_time as  end_time, ts.completed as completed, ts.completed_by_id as completed_by_id,
+        ts.completed_time as completed_time, ts.audited as audited, ts.audited_by_id as audited_by_id, ts.audited_time as audited_time,
+        ts.archived as archived, ts.archived_by_id as archived_by_id, ts.archived_time as archived_time,
+        ts.suspended as suspended, ts.suspended_by_id as suspended_by_id, ts.suspended_time as suspended_time, ts.unreachable as unreachable,
+        ts.open_times as open_times, ts.parent_id as parent_id, ts.description as description,
+        ts.deleted_flag as deleted_flag, ts.created_by_id as created_by_id, ts.created_org_id as created_org_id,
+        ts.created_time as created_time, ts.updated_by_id as updated_by_id, ts.updated_org_id as updated_org_id,
+        ts.updated_time as updated_time, ts.deleted_by_id as deleted_by_id,
+        ts.deleted_org_id as deleted_org_id, ts.deleted_time as deleted_time
+        from tm_task  as ts
+    </sql>
+
+    <sql id="selectTaskItemDtoPart">
+        select distinct ts.id as id, ts.tenant_id as tenant_id, ts.project_id as project_id, ts.task_type as task_type,
+        ts.title as title, ts.content as content, ts.owner_bonus_points as owner_bonus_points, ts.assignee_bonus_points as assignee_bonus_points,
+        ts.participator_bonus_points as participator_bonus_points, ts.progress_status as progress_status,
+        ts.begin_time as begin_time, ts.end_time as  end_time, ts.completed as completed, ts.completed_by_id as completed_by_id,
+        ts.completed_time as completed_time, ts.archived as archived, ts.archived_by_id as archived_by_id, ts.archived_time as archived_time,
+        ts.suspended as suspended, ts.suspended_by_id as suspended_by_id, ts.suspended_time as suspended_time, ts.unreachable as unreachable,
+        ts.open_times as open_times, ts.parent_id as parent_id, ts.description as description,
+        ts.deleted_flag as deleted_flag, ts.created_by_id as created_by_id, ts.created_org_id as created_org_id,
+        ts.created_time as created_time, ts.updated_by_id as updated_by_id, ts.updated_org_id as updated_org_id,
+        ts.updated_time as updated_time, ts.deleted_by_id as deleted_by_id,
+        ts.deleted_org_id as deleted_org_id, ts.deleted_time as deleted_time
+        from tm_task  as ts
+        left join tm_task_domain_link lnk on ts.id=lnk.task_id
+        left join tm_task_staff_domain_link slink on ts.id=slink.task_id and slink.staff_id=#{currentStaffId}
+    </sql>
+
+    <sql id="whereClause">
+        <where>
+            <if test="id != null and id.size()>0">
+                and ts.id in
+                <foreach collection="id" item="i" separator="," open="(" close=")">
+                    #{i}
+                </foreach>
+            </if>
+            <if test="tenantId != null">
+                 and ts.tenant_id = #{tenantId}
+            </if>
+            <if test="projectId != null and projectId.size()>0">
+                and ts.project_id in
+                <foreach collection="projectId" item="i" separator="," open="(" close=")">
+                    #{i}
+                </foreach>
+            </if>
+            <if test="parentId != null and parentId.size()>0">
+                and ts.parent_id in
+                <foreach collection="parentId" item="i" separator="," open="(" close=")">
+                    #{i}
+                </foreach>
+            </if>
+            <if test="text != null">
+                and ts.title like '%'||#{text}||'%'
+            </if>
+            <if test="completed!=null">
+                and ts.completed=#{completed, jdbcType=NUMERIC}
+            </if>
+            <if test="suspended!=null">
+                and ts.suspended=#{suspended, jdbcType=NUMERIC}
+            </if>
+            <if test="archived!=null">
+                and ts.archived=#{archived, jdbcType=NUMERIC}
+            </if>
+            <if test="deletedFlag != null">
+                and ts.deleted_flag =  #{deletedFlag,jdbcType=NUMERIC}
+            </if>
+            <if test="includeSubTask!=null and !includeSubTask">
+                and ts.parent_id is null
+            </if>
+            <if test="beginTimeRangeLeft!=null">
+                and ts.begin_time>=#{beginTimeRangeLeft}
+            </if>
+            <if test="beginTimeRangeRight!=null">
+                and #{beginTimeRangeRight}>=ts.begin_time
+            </if>
+            <if test="endTimeRangeLeft!=null">
+                and ts.end_time>=#{endTimeRangeLeft}
+            </if>
+            <if test="endTimeRangeRight!=null">
+                and #{endTimeRangeRight}>=ts.end_time
+            </if>
+            <if test="completedTimeRangeLeft!=null">
+                and ts.completed_time>=#{completedTimeRangeLeft}
+            </if>
+            <if test="completedTimeRangeRight!=null">
+                and #{completedTimeRangeRight}>=ts.completed_time
+            </if>
+            <if test="createdById!=null and createdById.size()>0">
+                and ts.created_by_id in
+                <foreach collection="createdById" item="i" open="(" separator="," close=")">
+                    #{i}
+                </foreach>
+            </if>
+            <if test="assigneeId!=null and assigneeId.size()>0">
+                and (lnk.domain_id in
+                <foreach collection="assigneeId" item="i" open="(" separator="," close=")">
+                    #{i}
+                </foreach>
+                and lnk.task_field='assigneeIdList')
+            </if>
+            <if test="participatorId!=null and participatorId.size()>0">
+                and (lnk.domain_id in
+                <foreach collection="participatorId" item="i" open="(" separator="," close=")">
+                    #{i}
+                </foreach>
+                and lnk.task_field='participatorIdList')
+            </if>
+            <if test="supervisorId!=null and supervisorId.size()>0">
+                and (lnk.domain_id in
+                <foreach collection="supervisorId" item="i" open="(" separator="," close=")">
+                    #{i}
+                </foreach>
+                and lnk.task_field='supervisorIdList')
+            </if>
+            <if test="tagId!=null and tagId.size()>0">
+                and (lnk.domain_id in
+                <foreach collection="tagId" item="i" open="(" separator="," close=")">
+                    #{i}
+                </foreach>
+                and lnk.task_field='tagIdList')
+            </if>
+            <if test="groupId!=null and groupId.size()>0">
+                and (slink.domain_id in
+                <foreach collection="groupId" item="i" open="(" separator="," close=")">
+                    #{i}
+                </foreach>
+                and slink.task_field='groupIdList')
+            </if>
+            <if test="queryType!=null">
+                <if test="queryType.toString()=='OWNER'">
+                    and ts.created_by_id = #{currentStaffId}
+                </if>
+                <if test="queryType.toString()=='ASSIGNEE'">
+                    and lnk.domain_id = #{currentStaffId} and lnk.task_field='assigneeIdList'
+                </if>
+                <if test="queryType.toString()=='SUPERVISOR'">
+                    and lnk.domain_id = #{currentStaffId} and lnk.task_field='supervisorIdList'
+                </if>
+                <if test="queryType.toString()=='PARTICIPATOR'">
+                    and lnk.domain_id = #{currentStaffId} and lnk.task_field='participatorIdList'
+                </if>
+                <if test="queryType.toString()=='AUDITOR'">
+                    and ((lnk.domain_id = #{currentStaffId} and lnk.task_field='auditorIdList')
+                    or ts.created_by_id=#{currentStaffId})
+                </if>
+            </if>
+            <if test="status!=null">
+                <if test="status.toString()=='INCOMPLETE'">
+                  and ts.completed = 0
+                </if>
+                <if test="status.toString()=='READY'">
+                    and ts.completed = 0 and ts.begin_time>#{currentTime}
+                </if>
+                <if test="status.toString()=='ONGOING'">
+                    and ts.completed=0 and #{currentTime}>=ts.begin_time and ts.end_time>=#{currentTime}
+                </if>
+                <if test="status.toString()=='EXPIRED'">
+                    and ts.completed=0 and #{currentTime}>ts.end_time
+                </if>
+                <if test="status.toString()=='COMPLETED'">
+                    and (ts.completed=1 and ts.audited=0 and ts.archived=0)
+                </if>
+                <if test="status.toString()=='COMPLETED_BEFORE'">
+                    and (ts.completed=1 and ts.audited=0 and ts.archived=0 and ts.end_time>=ts.completed_time)
+                </if>
+                <if test="status.toString()=='COMPLETED_AFTER'">
+                    and (ts.completed=1 and ts.audited=0 and ts.archived=0 and ts.completed_time>ts.end_time)
+                </if>
+                <if test="status.toString()=='UNREACHABLE'">
+                    and ts.unreachable=1
+                </if>
+                <if test="status.toString()=='AUDITED'">
+                    and (ts.audited=1 and ts.archived=0)
+                </if>
+                <if test="status.toString()=='ARCHIVED'">
+                    and ts.archived=1
+                </if>
+            </if>
+        </where>
+    </sql>
+
+    <select id="findTaskById" resultMap="taskDtoMap">
+        <include refid="selectTaskDtoPart"/>
+        where id = #{taskId}
+    </select>
+
+    <select id="findTaskList" resultMap="taskItemPart">
+        <include refid="selectTaskItemDtoPart"/>
+        <include refid="whereClause"/>
+        <if test="sortBy.toString()=='CREATED_TIME_ASC'">
+          order by ts.created_time asc
+        </if>
+        <if test="sortBy.toString()=='CREATED_TIME_DESC'">
+          order by ts.created_time desc
+        </if>
+        <if test="sortBy.toString()=='BEGIN_TIME_ASC'">
+            order by ts.begin_time asc
+        </if>
+        <if test="sortBy.toString()=='BEGIN_TIME_DESC'">
+            order by ts.begin_time desc
+        </if>
+        <if test="sortBy.toString()=='END_TIME_ASC'">
+            order by ts.end_time asc
+        </if>
+        <if test="sortBy.toString()=='END_TIME_DESC'">
+            order by ts.end_time desc
+        </if>
+    </select>
+
+    <select id="countsOwnerTask" resultMap="taskCountsDtoMap">
+      select
+        sum(case (begin_time>#{now}) when true then 1 else 0 end ) as unbegin,
+        sum(case (#{now}>end_time) when true then 1 else 0 end) as expired,
+        sum(case (#{now}>=begin_time and end_time>=#{now}) when true then 1 else 0 end) as underway
+      from tm_task where
+      created_by_id = #{staffId}
+      and tenant_id = #{tenantId}
+      and completed = 0
+      and suspended = 0
+      and deleted_flag=0
+    </select>
+
+    <select id="countsAssigneeTask" resultMap="taskCountsDtoMap">
+      select
+        sum(case (begin_time>#{now}) when true then 1 else 0 end ) as unbegin,
+        sum(case (#{now}>end_time) when true then 1 else 0 end) as expired,
+        sum(case (#{now}>=begin_time and end_time>=#{now}) when true then 1 else 0 end) as underway
+      from tm_task where
+      id in (select task_id from tm_task_domain_link where domain_id=#{staffId} and task_field='assigneeIdList' and domain_type='Staff')
+      and tenant_id = #{tenantId}
+      and completed = 0
+      and suspended = 0
+      and deleted_flag=0
+    </select>
+
+    <select id="countsAuditorTask" resultType="java.lang.Long">
+      select
+        count(id)
+      from tm_task where
+      id in (select task_id from tm_task_domain_link where domain_id=#{staffId} and task_field='auditorIdList' and domain_type='Staff')
+      and tenant_id = #{tenantId}
+      and completed = 1
+      and suspended = 0
+      and audited = 0
+      and deleted_flag = 0
+    </select>
+
+    <select id="countsParticipatorTask" resultMap="taskCountsDtoMap">
+      select
+        sum(case (begin_time>#{now}) when true then 1 else 0 end ) as unbegin,
+        sum(case (#{now}>end_time) when true then 1 else 0 end) as expired,
+        sum(case (#{now}>=begin_time and end_time>=#{now}) when true then 1 else 0 end) as underway
+      from tm_task where
+      id in (select task_id from tm_task_domain_link where domain_id=#{staffId} and task_field='participatorIdList' and domain_type='Staff')
+      and tenant_id = #{tenantId}
+      and completed = 0
+      and suspended = 0
+      and deleted_flag=0
+    </select>
+
+    <select id="countsSupervisorTask" resultMap="taskCountsDtoMap">
+      select
+        sum(case (begin_time>#{now}) when true then 1 else 0 end ) as unbegin,
+        sum(case (#{now}>end_time) when true then 1 else 0 end) as expired,
+        sum(case (#{now}>=begin_time and end_time>=#{now}) when true then 1 else 0 end) as underway
+      from tm_task where
+      id in (select task_id from tm_task_domain_link where domain_id=#{staffId} and task_field='supervisorIdList' and domain_type='Staff')
+      and tenant_id = #{tenantId}
+      and completed = 0
+      and suspended = 0
+      and deleted_flag=0
+    </select>
+
+    <select id="findStaffTaskBounsPoints" resultType="java.lang.Long">
+        select sum(owner_bonus_points) from tm_task task
+        inner join tm_task_domain_link lnk on task.id=lnk.task_id and lnk.tenant_id=task.tenant_id
+        where
+        lnk.domain_id=#{staffId}
+        and lnk.task_field = 'assigneeIdList'
+        and task.completed = 1
+        and task.deleted_flag=0
+        and ((task.task_type=1 and task.completed_by_id=#{staffId}) or (task.task_type=2 and lnk.domain_id=#{staffId} and lnk.task_field='assigneeIdList'))
+        <if test="beginTime!=null">
+            and task.completed_time >= #{beginTime}
+        </if>
+        <if test="endTime!=null">
+            and #{endTime} >= task.completed_time
+        </if>
+        <if test="projectId!=null">
+            and task.project_id = #{projectId}
+        </if>
+    </select>
+
+    <select id="countStaffCompletedTask" resultType="java.lang.Long">
+        select count(distinct task.id) from tm_task task
+        inner join tm_task_domain_link lnk  on task.id=lnk.task_id and lnk.tenant_id=task.tenant_id
+        where
+        lnk.domain_id=#{staffId}
+        and lnk.task_field = 'assigneeIdList'
+        and task.completed = 1
+        and task.deleted_flag=0
+        and ((task.task_type=1 and task.completed_by_id=#{staffId}) or (task.task_type=2 and lnk.domain_id=#{staffId} and lnk.task_field='assigneeIdList'))
+        <if test="beginTime!=null">
+            and task.completed_time >= #{beginTime}
+        </if>
+        <if test="endTime!=null">
+            and #{endTime} >= task.completed_time
+        </if>
+        <if test="projectId!=null">
+            and task.project_id = #{projectId}
+        </if>
+    </select>
+
+    <select id="reportTaskByAssignee" resultMap="taskAssigneeReportDto">
+        select staff_id as assignee_id, sum(incomplete) as incomplete, sum(incomplete_underway) as incomplete_underway, sum(incomplete_expired) as incomplete_expired,
+        sum(completed) as completed, sum(completed_before) as completed_before, sum(completed_after) as completed_after, sum(archived) as archived,
+        sum(assignee_bonus_points) as assignee_bonus_points, sum(participator_bonus_points) as participator_bonus_points,
+        sum(owner_bonus_points) as owner_bonus_points from (
+        select lnk.staff_id as staff_id,
+        case task.completed=0 and task.suspended=0 when true then 1 else 0 end as incomplete,
+        case task.completed=0 and task.suspended=0 and task.end_time>=#{currentTime} when true then 1 else 0 end as incomplete_underway,
+        case task.completed=0 and task.suspended=0 and #{currentTime}>task.end_time when true then 1 else 0 end as incomplete_expired,
+        case task.completed=1 when true then 1 else 0 end as completed,
+        case task.completed=1 and task.end_time>=task.completed_time when true then 1 else 0 end as completed_before,
+        case task.completed=1 and task.completed_time>task.end_time when true then 1 else 0 end as completed_after,
+        case task.completed=1 and task.archived=1 when true then 1 else 0 end as archived,
+        case task.completed=1 and assignee_count>0 when true then task.assignee_bonus_points else 0 end as assignee_bonus_points,
+        case task.completed=1 and participator_count>0 when true then task.participator_bonus_points else 0 end as participator_bonus_points,
+        case task.completed=1 and staff_id=task.created_by_id when true then task.owner_bonus_points else 0 end as owner_bonus_points
+        from tm_task task inner join (select
+                lnk.task_id as task_id, lnk.domain_id as staff_id,
+                sum(case lnk.task_field='assigneeIdList' when true then 1 else 0 end) as assignee_count,
+                sum(case lnk.task_field='participatorIdList' when true then 1 else 0 end) as participator_count
+            from tm_task_domain_link lnk group by lnk.task_id, lnk.domain_id) lnk
+        on task.id=lnk.task_id
+        where task.deleted_flag=0
+        <if test="projectId!=null">
+            and task.project_id = #{projectId}
+        </if>
+        <if test="beginTime!=null">
+            and task.completed_time>=#{beginTime}
+        </if>
+        <if test="endTime!=null">
+            and #{endTime}>=task.completed_time
+        </if>
+        and task.tenant_id = #{tenantId}
+        ) t
+        <where>
+            <if test="staffId!=null">
+                and staff_id = #{staffId}
+            </if>
+        </where>
+        group by staff_id
+        order by staff_id
+    </select>
+
+    <select id="reportTaskByProject" resultMap="taskProjectReportDto">
+        select assignee_id, sum(incomplete) as incomplete, sum(incomplete_underway) as incomplete_underway, sum(incomplete_expired) as incomplete_expired,
+        sum(completed) as completed, sum(completed_before) as completed_before, sum(completed_after) as completed_after, sum(archived) as archived from (
+        select lnk.domain_id as assignee_id,
+        case task.completed=0 and task.suspended=0 when true then 1 else 0 end as incomplete,
+        case task.completed=0 and task.suspended=0 and task.end_time>=#{currentTime} when true then 1 else 0 end as incomplete_underway,
+        case task.completed=0 and task.suspended=0 and #{currentTime}>task.end_time when true then 1 else 0 end as incomplete_expired,
+        case task.completed=1 when true then 1 else 0 end as completed,
+        case task.completed=1 and task.end_time>=task.completed_time when true then 1 else 0 end as completed_before,
+        case task.completed=1 and task.completed_time>task.end_time when true then 1 else 0 end as completed_after,
+        case task.completed=1 and task.archived=1 when true then 1 else 0 end as archived
+        from tm_task task inner join tm_task_domain_link lnk
+        on task.id=lnk.task_id and lnk.task_field='assigneeIdList'
+        where task.deleted_flag=0
+        <if test="projectId!=null">
+            and task.project_id = #{projectId}
+        </if>
+        <if test="beginTime!=null">
+            and task.completed_time>=#{beginTime}
+        </if>
+        <if test="endTime!=null">
+            and #{endTime}>=task.completed_time
+        </if>
+        and task.tenant_id = #{tenantId}
+        ) t
+        group by assignee_id
+        order by assignee_id
+    </select>
+</mapper>

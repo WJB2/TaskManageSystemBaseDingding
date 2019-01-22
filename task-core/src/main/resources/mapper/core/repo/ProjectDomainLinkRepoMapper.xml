@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hozensoft.task.core.dao.repo.ProjectDomainLinkRepo">
+
+    <insert id="addLinks">
+        insert into tm_project_domain_link(id, tenant_id, project_id, project_field,
+          domain_type, domain_id, sort_no)
+        values
+        <foreach collection="links" item="i"  separator=",">
+            (#{i.id}, #{i.tenantId}, #{i.projectId}, #{i.projectField}, #{i.domainType},
+            #{i.domainId}, #{i.sortNo})
+        </foreach>
+    </insert>
+
+    <delete id="deleteLinksByProjectInfo">
+        delete from tm_project_domain_link where
+        project_id = #{projectId}
+        <if test="projectField!=null and projectField.size()>0">
+            and project_field in
+            <foreach collection="projectField" item="i" open="(" close=")" separator=",">
+                #{i}
+            </foreach>
+        </if>
+        <if test="domainType!=null and domainType.size()>0">
+            and domain_type in
+            <foreach collection="domainType" item="i" open="(" close=")" separator=",">
+                #{i}
+            </foreach>
+        </if>
+        and tenant_id = #{tenantId}
+    </delete>
+
+    <resultMap id="projectDomainLinkMap" type="com.hozensoft.task.core.domain.ProjectDomainLink">
+        <id property="id" column="id" />
+        <result property="tenantId" column="tenant_id" />
+        <result property="projectId" column="project_id" />
+        <result property="projectField" column="project_field" />
+        <result property="domainType" column="domain_type" />
+        <result property="domainId" column="domain_id" />
+        <result property="sortNo" column="sort_no" />
+    </resultMap>
+
+    <select id="loadProjectDomainLinkList" resultMap="projectDomainLinkMap">
+      select lnk.id as id, lnk.tenant_id as tenant_id, lnk.project_id as project_id,
+      lnk.project_field as project_field, lnk.domain_type as domain_type,
+      lnk.domain_id as domain_id, lnk.sort_no as sort_no
+      from tm_project_domain_link lnk
+      <where>
+          <if test="projectId!=null and projectId.size()>0">
+              and lnk.project_id in
+              <foreach collection="projectId" item="i" open="(" close=")" separator=",">
+                  #{i}
+              </foreach>
+          </if>
+          <if test="excludeProjectId!=null and excludeProjectId.size()>0">
+              and lnk.project_id not in
+              <foreach collection="excludeProjectId" item="i" open="(" close=")" separator=",">
+                  #{i}
+              </foreach>
+          </if>
+          <if test="projectField!=null and projectField.size()>0">
+              and lnk.project_field in
+              <foreach collection="projectField" item="i" open="(" close=")" separator=",">
+                  #{i}
+              </foreach>
+          </if>
+          <if test="excludeProjectField!=null and excludeProjectField.size()>0">
+              and lnk.project_field not in
+              <foreach collection="excludeProjectField" item="i" open="(" close=")" separator=",">
+                  #{i}
+              </foreach>
+          </if>
+          <if test="domainType!=null and domainType.size()>0">
+              and lnk.domain_type in
+              <foreach collection="domainType" item="i" open="(" close=")" separator=",">
+                  #{i}
+              </foreach>
+          </if>
+          <if test="excludeDomainType!=null and excludeDomainType.size()>0">
+              and lnk.domain_type not in
+              <foreach collection="excludeDomainType" item="i" open="(" close=")" separator=",">
+                  #{i}
+              </foreach>
+          </if>
+          <if test="domainId!=null and domainId.size()>0">
+              and lnk.domain_id in
+              <foreach collection="domainId" item="i" open="(" close=")" separator=",">
+                  #{i}
+              </foreach>
+          </if>
+          <if test="excludeDomainId!=null and excludeDomainId.size()>0">
+              and lnk.domain_id not in
+              <foreach collection="excludeDomainId" item="i" open="(" close=")" separator=",">
+                  #{i}
+              </foreach>
+          </if>
+          and tenant_id = #{tenantId}
+      </where>
+    </select>
+</mapper>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hozensoft.task.core.dao.repo.TaskDomainLinkRepo">
+
+    <insert id="addLinks">
+        insert into tm_task_domain_link(id, tenant_id, task_id, task_field,
+          domain_type, domain_id, sort_no, completed, completed_time)
+        values
+        <foreach collection="links" item="i"  separator=",">
+            (#{i.id}, #{i.tenantId}, #{i.taskId}, #{i.taskField}, #{i.domainType},
+            #{i.domainId}, #{i.sortNo}, #{i.completed, jdbcType=NUMERIC}, #{i.completedTime})
+        </foreach>
+    </insert>
+
+    <update id="editLink">
+        update tm_task_domain_link set
+          completed = #{completed, jdbcType=NUMERIC},
+          completed_time = #{completedTime}
+        where id = #{id} and tenant_id = #{tenantId}
+    </update>
+
+    <delete id="deleteLinksByTaskInfo">
+        delete from tm_task_domain_link where
+        task_id = #{taskId}
+        <if test="taskField!=null and taskField.size()>0">
+            and task_field in
+            <foreach collection="taskField" item="i" open="(" close=")" separator=",">
+                #{i}
+            </foreach>
+        </if>
+        <if test="domainType!=null and domainType.size()>0">
+            and domain_type in
+            <foreach collection="domainType" item="i" open="(" close=")" separator=",">
+                #{i}
+            </foreach>
+        </if>
+        and tenant_id = #{tenantId}
+    </delete>
+
+    <resultMap id="taskDomainLinkMap" type="com.hozensoft.task.core.domain.TaskDomainLink">
+        <id property="id" column="id" />
+        <result property="tenantId" column="tenant_id" />
+        <result property="taskId" column="task_id" />
+        <result property="taskField" column="task_field" />
+        <result property="domainType" column="domain_type" />
+        <result property="domainId" column="domain_id" />
+        <result property="sortNo" column="sort_no" />
+        <result property="completed" column="completed" />
+        <result property="completedTime" column="completed_time" />
+    </resultMap>
+
+    <select id="loadTaskDomainLinkList" resultMap="taskDomainLinkMap">
+      select lnk.id as id, lnk.tenant_id as tenant_id, lnk.task_id as task_id,
+      lnk.task_field as task_field, lnk.domain_type as domain_type,
+      lnk.domain_id as domain_id, lnk.sort_no as sort_no, lnk.completed as completed,
+      lnk.completed_time as completed_time
+      from tm_task_domain_link lnk
+      <where>
+          <if test="taskId!=null and taskId.size()>0">
+              and lnk.task_id in
+              <foreach collection="taskId" item="i" open="(" close=")" separator=",">
+                  #{i}
+              </foreach>
+          </if>
+          <if test="excludeTaskId!=null and excludeTaskId.size()>0">
+              and lnk.task_id not in
+              <foreach collection="excludeTaskId" item="i" open="(" close=")" separator=",">
+                  #{i}
+              </foreach>
+          </if>
+          <if test="taskField!=null and taskField.size()>0">
+              and lnk.task_field in
+              <foreach collection="taskField" item="i" open="(" close=")" separator=",">
+                  #{i}
+              </foreach>
+          </if>
+          <if test="excludeTaskField!=null and excludeTaskField.size()>0">
+              and lnk.task_field not in
+              <foreach collection="excludeTaskField" item="i" open="(" close=")" separator=",">
+                  #{i}
+              </foreach>
+          </if>
+          <if test="domainType!=null and domainType.size()>0">
+              and lnk.domain_type in
+              <foreach collection="domainType" item="i" open="(" close=")" separator=",">
+                  #{i}
+              </foreach>
+          </if>
+          <if test="excludeDomainType!=null and excludeDomainType.size()>0">
+              and lnk.domain_type not in
+              <foreach collection="excludeDomainType" item="i" open="(" close=")" separator=",">
+                  #{i}
+              </foreach>
+          </if>
+          <if test="domainId!=null and domainId.size()>0">
+              and lnk.domain_id in
+              <foreach collection="domainId" item="i" open="(" close=")" separator=",">
+                  #{i}
+              </foreach>
+          </if>
+          <if test="excludeDomainId!=null and excludeDomainId.size()>0">
+              and lnk.domain_id not in
+              <foreach collection="excludeDomainId" item="i" open="(" close=")" separator=",">
+                  #{i}
+              </foreach>
+          </if>
+          and tenant_id = #{tenantId}
+      </where>
+    </select>
+</mapper>

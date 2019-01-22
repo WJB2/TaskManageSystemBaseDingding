@@ -1,0 +1,7 @@
+
+dependencies {
+
+    compile "com.hozensoft:application-configuration:0.0.1-SNAPSHOT"
+
+    testCompile libraries.sprintBootProvided
+}

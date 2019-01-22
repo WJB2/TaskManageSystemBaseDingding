@@ -1,0 +1,166 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+ 
+	<changeSet id="create_gbl_tenant" author="zhujingjun">
+		<comment>创建租户信息表</comment>
+		<createTable tableName="gbl_tenant">
+			<column name="id" type="VARCHAR(32)" remarks="ID">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="name" type="VARCHAR(80)" remarks="租户名称">
+				<constraints nullable="false"/>
+			</column>
+			<column name="admin_user_id" type="VARCHAR(32)" remarks="管理员用户ID">
+				<constraints nullable="false"/>
+			</column>
+			<column name="primary_organization_id" type="VARCHAR(32)" remarks="默认组织机构">
+				<constraints nullable="true"/>
+			</column>
+			<column name="status" type="numeric(2, 0)" remarks="状态">
+				<constraints nullable="false"/>
+			</column>
+			<column name="deleted_flag" type="numeric(2, 0)" remarks="删除状态">
+				<constraints nullable="false"/>
+			</column>
+			<column name="created_by_id" type="VARCHAR(128)" remarks="创建用户ID">
+				<constraints nullable="false"/>
+			</column>
+			<column name="created_time" type="timestamp" remarks="创建时间">
+				<constraints nullable="false"/>
+			</column>
+		</createTable>
+		<rollback>
+			<sql>
+				drop table gbl_tenant
+			</sql>
+		</rollback>
+	</changeSet>
+	
+	<changeSet id="create_gbl_module" author="zhujingjun">
+		<comment>创建模块信息表</comment>
+		<createTable tableName="gbl_module">
+			<column name="id" type="VARCHAR(32)" remarks="ID">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="name" type="VARCHAR(160)" remarks="模块名称">
+				<constraints nullable="false"/>
+			</column>
+			<column name="name_abbr" type="VARCHAR(20)" remarks="模块简称">
+				<constraints nullable="true"/>
+			</column>
+			<column name="icon" type="VARCHAR(200)" remarks="模块图标">
+				<constraints nullable="true"/>
+			</column>
+			<column name="link_path" type="VARCHAR(200)" remarks="模块主页链接地址">
+				<constraints nullable="false"/>
+			</column>
+			<column name="menu_id" type="VARCHAR(32)" remarks="模块根菜单ID">
+				<constraints nullable="true"/>
+			</column>
+			<column name="sort_no" type="numeric(8,0)" remarks="显示序号">
+				<constraints nullable="false"/>
+			</column>
+		</createTable>
+		<rollback>
+			<sql>
+				drop table gbl_module
+			</sql>
+		</rollback>
+	</changeSet>
+	
+	<changeSet id="create_gbl_permission" author="zhujingjun">
+		<comment>创建权限信息表</comment>
+		<createTable tableName="gbl_permission">
+			<column name="id" type="VARCHAR(32)" remarks="ID">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="parent_id" type="VARCHAR(32)" remarks="上级ID">
+				<constraints nullable="true"/>
+			</column>
+			<column name="wildcard" type="VARCHAR(128)" remarks="权限编码">
+				<constraints unique="true" nullable="false" />
+			</column>
+			<column name="name" type="VARCHAR(256)" remarks="权限名称">
+				<constraints nullable="false"/>
+			</column>
+			<column name="name_pinyin" type="VARCHAR(256)" remarks="权限名称简拼">
+				<constraints nullable="true"/>
+			</column>
+			<column name="name_abbr" type="VARCHAR(20)" remarks="权限简称">
+				<constraints nullable="true"/>
+			</column>
+			<column name="name_abbr_pinyin" type="VARCHAR(20)" remarks="权限简称简拼">
+				<constraints nullable="true"/>
+			</column>
+			<column name="name_alias" type="VARCHAR(80)" remarks="权限别名">
+				<constraints nullable="true"/>
+			</column>
+			<column name="name_alias_pinyin" type="VARCHAR(80)" remarks="权限别名简拼">
+				<constraints nullable="true"/>
+			</column>
+			<column name="sort_no" type="NUMERIC(8, 0)" remarks="显示顺序">
+				<constraints nullable="true"/>
+			</column>
+		</createTable>
+		<rollback>
+			<sql>
+				drop table gbl_permission
+			</sql>
+		</rollback>
+	</changeSet>
+	
+	<changeSet id="create_gbl_menu" author="zhujingjun">
+		<comment>创建菜单信息表</comment>
+		<createTable tableName="gbl_menu">
+			<column name="id" type="VARCHAR(32)">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="parent_id" type="VARCHAR(32)">
+				<constraints nullable="true"/>
+			</column>
+			<column name="code" type="VARCHAR(32)">
+				<constraints unique="true" nullable="false"/>
+			</column>
+			<column name="name" type="VARCHAR(256)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="name_pinyin" type="VARCHAR(256)">
+				<constraints nullable="true"/>
+			</column>
+			<column name="name_abbr" type="VARCHAR(20)">
+				<constraints nullable="true"/>
+			</column>
+			<column name="name_abbr_pinyin" type="VARCHAR(20)">
+				<constraints nullable="true"/>
+			</column>
+			<column name="name_alias" type="VARCHAR(80)">
+				<constraints nullable="true"/>
+			</column>
+			<column name="name_alias_pinyin" type="VARCHAR(80)">
+				<constraints nullable="true"/>
+			</column>
+			<column name="icon" type="VARCHAR(128)">
+				<constraints nullable="true"/>
+			</column>
+			<column name="link_path" type="VARCHAR(128)">
+				<constraints nullable="true"/>
+			</column>
+			<column name="sort_no" type="numeric(8,0)">
+				<constraints nullable="true"/>
+			</column>
+			<column name="permission_id" type="VARCHAR(32)">
+				<constraints nullable="true"/>
+			</column>
+		</createTable>
+		<rollback>
+			<sql>
+				drop table gbl_menu
+			</sql>
+		</rollback>
+	</changeSet>
+ 
+ </databaseChangeLog>

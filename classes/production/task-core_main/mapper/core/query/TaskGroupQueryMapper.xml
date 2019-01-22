@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hozensoft.task.core.dao.query.TaskGroupQuery">
+    <resultMap id="taskGroupDtoMap" type="com.hozensoft.task.core.dto.TaskGroupDto">
+        <id property="id" column="id"/>
+        <result property="tenantId" column="tenant_id"/>
+        <result property="name" column="name"/>
+        <result property="staffId" column="staff_id"/>
+        <result property="sortNo" column="sort_no"/>
+    </resultMap>
+
+    <resultMap id="taskGroupItemDtoMap" type="com.hozensoft.task.core.dto.TaskGroupItemDto">
+        <id property="id" column="id"/>
+        <result property="tenantId" column="tenant_id"/>
+        <result property="name" column="name"/>
+        <result property="staffId" column="staff_id"/>
+        <result property="sortNo" column="sort_no"/>
+    </resultMap>
+
+    <sql id="selectTaskGroupDtoPart">
+        select tg.id as id, tg.tenant_id as tenant_id, tg.name as name,
+        tg.staff_id as staff_id, tg.sort_no as sort_no
+        from tm_task_group as tg
+    </sql>
+
+    <sql id="selectTaskGroupItemDtoPart">
+        select tg.id as id, tg.tenant_id as tenant_id, tg.name as name,
+        tg.staff_id as staff_id, tg.sort_no as sort_no
+        from tm_task_group as tg
+    </sql>
+
+    <sql id="whereClause">
+        <where>
+            <if test="id != null and id.size()>0">
+                and tg.id in
+                <foreach collection="id" item="i" separator="," open="(" close=")">
+                    #{i}
+                </foreach>
+            </if>
+            <if test="tenantId != null">
+                and tg.tenant_id = #{tenantId}
+            </if>
+            <if test="name != null">
+                and tg.name = #{name}
+            </if>
+            <if test="staffId != null">
+                and tg.staff_id = #{staffId}
+            </if>
+        </where>
+    </sql>
+
+    <select id="findTaskGroupById" resultMap="taskGroupDtoMap">
+        <include refid="selectTaskGroupDtoPart"/>
+        where tg.id=#{taskGroupId}
+    </select>
+
+
+    <select id="findTaskGroupList" resultMap="taskGroupItemDtoMap">
+        <include refid="selectTaskGroupItemDtoPart"/>
+        <include refid="whereClause"/>
+    </select>
+</mapper>

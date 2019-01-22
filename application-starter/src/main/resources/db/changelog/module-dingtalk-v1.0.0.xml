@@ -1,0 +1,127 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="create_dd_corp_info" author="zhujingjun">
+        <comment>创建钉钉企业信息表</comment>
+        <createTable tableName="dd_corp_info">
+            <column name="id" type="VARCHAR(32)" remarks="ID">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="tenant_id" type="VARCHAR(32)" remarks="租户ID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="corp_id" type="VARCHAR(128)" remarks="企业ID">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="corp_secret" type="VARCHAR(128)" remarks="企业秘钥">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sso_secret" type="VARCHAR(128)" remarks="管理后台SSO秘钥">
+                <constraints nullable="true"/>
+            </column>
+            <column name="channel_secret" type="VARCHAR(128)" remarks="服务窗应用秘钥">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create_dd_corp_token_info" author="zhujingjun">
+        <comment>创建钉钉企业开发令牌信息表</comment>
+        <createTable tableName="dd_corp_token_info">
+            <column name="id" type="VARCHAR(32)" remarks="ID">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="corp_id" type="VARCHAR(128)" remarks="企业ID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="access_token" type="VARCHAR(256)" remarks="令牌">
+                <constraints nullable="true"/>
+            </column>
+            <column name="access_token_created_time" type="TIMESTAMP" remarks="令牌创建时间">
+                <constraints nullable="true"/>
+            </column>
+            <column name="jsapi_ticket" type="VARCHAR(256)" remarks="JSAPI令牌">
+                <constraints nullable="true"/>
+            </column>
+            <column name="jsapi_ticket_created_time" type="TIMESTAMP" remarks="JSAPI令牌创建时间">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    
+    <changeSet id="create_dd_dt_organization_link" author="zhujingjun">
+        <comment>创建钉钉部门信息同步表</comment>
+        <createTable tableName="dd_dt_organization_link">
+            <column name="id" type="VARCHAR(32)" remarks="ID">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="tenant_id" type="VARCHAR(32)" remarks="租户ID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="org_id" type="VARCHAR(32)" remarks="组织机构ID">
+                <constraints nullable="false" />
+            </column>
+            <column name="dingtalk_dept_id" type="NUMERIC(10,0)" remarks="钉钉组织机构ID">
+                <constraints nullable="false" />
+            </column>
+            <column name="created_time" type="TIMESTAMP" remarks="JSAPI令牌创建时间">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_time" type="TIMESTAMP" remarks="JSAPI令牌创建时间">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create_dd_dt_staff_link" author="zhujingjun">
+        <comment>创建钉钉用户信息同步表</comment>
+        <createTable tableName="dd_dt_staff_link">
+            <column name="id" type="VARCHAR(32)" remarks="ID">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="tenant_id" type="VARCHAR(32)" remarks="租户ID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="staff_id" type="VARCHAR(32)" remarks="人员ID">
+                <constraints nullable="false" />
+            </column>
+            <column name="dingtalk_user_id" type="VARCHAR(64)" remarks="钉钉用户ID">
+                <constraints nullable="false" />
+            </column>
+            <column name="created_time" type="TIMESTAMP" remarks="JSAPI令牌创建时间">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_time" type="TIMESTAMP" remarks="JSAPI令牌创建时间">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create_dd_dt_role_link" author="zhujingjun">
+        <comment>创建钉钉角色信息同步表</comment>
+        <createTable tableName="dd_dt_role_link">
+            <column name="id" type="VARCHAR(32)" remarks="ID">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="tenant_id" type="VARCHAR(32)" remarks="租户ID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role_id" type="VARCHAR(32)" remarks="角色ID">
+                <constraints nullable="false" />
+            </column>
+            <column name="dingtalk_role_id" type="NUMERIC(10,0)" remarks="钉钉用户ID">
+                <constraints nullable="false" />
+            </column>
+            <column name="created_time" type="TIMESTAMP" remarks="JSAPI令牌创建时间">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_time" type="TIMESTAMP" remarks="JSAPI令牌创建时间">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

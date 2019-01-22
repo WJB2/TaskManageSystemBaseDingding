@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hozensoft.task.core.dao.repo.TaskGroupRepo">
+
+    <insert id="addTaskGroup" >
+        insert into tm_task_group(id, tenant_id,  name, staff_id, sort_no)
+        values (#{id}, #{tenantId}, #{name}, #{staffId}, #{sortNo})
+    </insert>
+
+    <update id="editTaskGroup">
+        update tm_task_group set
+          tenant_id = #{tenantId},
+          name = #{name},
+          staff_id = #{staffId},
+          sort_no = #{sortNo}
+        where id = #{id}
+    </update>
+
+    <update id="patchEditTaskGroup">
+        update tm_task_group
+        <set>
+            <if test="tenantId!= null">
+                tenant_id = #{tenantId},
+            </if>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="staffId != null">
+                staff_id = #{staffId}
+            </if>
+            <if test="sortNo != null">
+                sort_no = #{sortNo}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTaskGroupById">
+        delete from tm_task_group  where id = #{taskGroupId}
+    </delete>
+
+    <resultMap id="taskGroupMap" type="com.hozensoft.task.core.domain.TaskGroup">
+        <id property="id" column="id"/>
+        <result property="tenantId" column="tenant_id"/>
+        <result property="name" column="name"/>
+        <result property="staffId" column="staff_id"/>
+        <result property="sortNo" column="sort_no"/>
+    </resultMap>
+
+    <sql id="selectTaskGroupPart">
+        select tg.id as id, tg.tenant_id as tenant_id, tg.name as name,
+        tg.staff_id as staff_id, tg.sort_no as sort_no
+        from tm_task_group as tg
+    </sql>
+
+    <select id="loadTaskGroupById">
+        <include refid="selectTaskGroupPart"/>
+        where tg.id = #{taskGroupId}
+    </select>
+</mapper>

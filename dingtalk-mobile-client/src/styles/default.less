@@ -1,0 +1,74 @@
+.flexdisplay{//设置弹性布局
+  display:-webkit-flex;
+  display:flex;
+}
+
+.boxorient(@property){//子元素应如何排列
+  display:-webkit-box;
+  -webkit-box-orient:@property;
+}
+
+.widthandheight(@width,@height,@lineheight){//设置元素宽高和行高
+  width:@width!important;
+  height:@height!important;
+  line-height:@lineheight!important;
+}
+
+.greyline{
+  .widthandheight(100%,0.3rem,0.3rem);
+  background-color:@colorA;
+}
+
+.newgreyline{
+  .widthandheight(100%,0.6rem,0.6rem);
+  background-color:@colorA;
+}
+
+.pos(r){
+  position:relative;
+}
+
+.pos(a){
+  position:absolute;
+}
+
+.pos(f){
+  position:fixed;
+}
+
+.boxsizing{
+  box-sizing:border-box;
+}
+
+.borderRadius(@radius){
+  -moz-border-radius:@radius;
+  -webkit-border-radius:@radius;
+  border-radius:@radius;
+}
+
+@colorA:#F6F6F6;//背景灰色
+@colorB:#FFFFFF;//背景白色
+@colorC:#7ABBFC;//组件淡蓝色
+@colorD:#EDEDEE;//输入框背景灰色
+@colorE:#A4A5A9;//搜索图标灰色
+@colorF:#7ABBFC;
+@colorG:black;//黑色
+@colorH:#F2F5F7;//灰色
+@colorI:#5B88CB;//按钮蓝色
+@colorJ:#3A4479;//导航栏紫色
+@colorK:#EDEFF3;//描述卡片边框颜色
+@colorL:#F7F9FA;//描述卡片边框背景颜色
+@colorM:#FF665C;//球一
+@colorN:#FFA122;//橘黄色
+@colorO:#3B4477;//导航栏紫色
+@colorP:#F2F5F7;//主頁面灰色
+@colorQ:#F1F4F7;
+@colorR:#B5BECF;//小球灰色
+@colorS:#80DAAF;//绿色小球
+@colorT:#55ABE9;//蓝色小球
+@colorU:#F99F27;//黄色小球
+@colorV:#F45C5C;//红色小球
+@colorW:#F0F2F5;//标签背景颜色
+@colorX:#666666;//进度条黑色
+@colorY:#484848;//字体灰色
+

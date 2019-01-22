@@ -1,0 +1,270 @@
+@import '../../styles/default.less';
+
+.homeindex{
+
+  background-color:@colorJ;
+  width:100%;
+  height:100%;
+
+  .homecontainer{
+
+    overflow:auto;
+    -webkit-overflow-scrolling:touch;
+    background-color:@colorJ;
+
+      .auditItem{
+
+        background-color:@colorB;
+        width:95%;
+        line-height:3.5rem;
+        min-height:3.5rem;
+        margin:0.5rem auto;
+        border-radius:5px;
+        box-sizing:border-box;
+
+        .auditHeader{
+
+          height:1rem;
+          line-height:1rem;
+          border-bottom:1px solid #ddd;
+          padding-left:0.2rem;
+          box-sizing:border-box;
+
+        }
+
+        .auditList{
+
+          min-height:2.5rem;
+          box-sizing:border-box;
+
+          .logAItem{
+
+            border-bottom: 1px solid #EFEFEF;
+            display: flex;
+            max-height:2.5rem;
+            box-sizing:border-box;
+
+            .logAItemIconWrapper{
+              width: 6em;
+            }
+
+            .logAItemIcon{
+
+              margin-top:0.4rem;
+              margin-left:0.2rem;
+              width:1.8rem;
+              height: 1.8rem;
+              line-height: 1.8rem;
+              border-radius: 50%;
+              text-align: center;
+              color: #fff;
+              font-weight: bolder;
+            }
+
+            .logATaskInfo{
+
+              height:1.5rem;
+
+            }
+
+            .logTaskATitle{
+              height:1rem;
+              line-height:1rem;
+              font-size:1.2em;
+              font-weight: bold;
+            }
+
+
+          }
+
+        }
+
+      }
+
+      .homestatis{
+
+        background-color:@colorB;
+        .widthandheight(95%,3.5rem,normal);
+        margin:0.5rem auto;
+        border-radius:5px;
+
+        .homepage{
+          display:flex;
+          .widthandheight(100%,1rem,1rem);
+          border-bottom:1px solid #E8ECF1;
+          align-items:center;
+
+          :nth-child(1){
+            font-weight:600;
+            margin-left:2%;
+          }
+
+          :nth-child(2){
+            margin:0 2% 0 30%;
+          }
+
+          :nth-child(3){
+            font-size:0.3rem;
+            color:grey;
+            margin-right:4%;
+          }
+
+          :nth-child(5){
+            font-size:0.3rem;
+            color:grey;
+            margin:0 4% 0 2%;
+          }
+
+          :nth-child(7){
+            font-size:0.3rem;
+            color:grey;
+            margin:0 4% 0 2%;
+          }
+        }
+
+        .hometaskcircle{
+          padding-top: 0.5em;
+          .widthandheight(100%,2.5rem,normal);
+          color:grey;
+          display:flex;
+
+          .started{
+            flex:1;
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+
+            :nth-child(2){
+              font-size:0.25rem;
+
+            }
+
+          }
+
+          .participator{
+            flex:1;
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+
+            :nth-child(2){
+              font-size:0.25rem;
+
+            }
+          }
+
+          .focus{
+            flex:1;
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+
+            :nth-child(2){
+              font-size:0.25rem;
+            }
+          }
+
+          .response{
+            flex:1;
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+
+            :nth-child(2){
+              font-size:0.25rem;
+
+            }
+          }
+        }
+      }
+
+      .homedynamic{
+
+        background-color:@colorB;
+        width:95%;
+        margin:0 auto;
+        border-radius:5px;
+        margin-bottom:0.5rem;
+
+
+        .header{
+          .widthandheight(100%,1rem,1rem);
+          display:flex;
+          justify-content:space-between;
+          :nth-child(1){
+            margin-left:0.2rem;
+          }
+          :nth-child(2){
+            margin-right:0.2rem;
+            color:#859EC6;
+          }
+          border-bottom:1px solid #E8ECF1;
+        }
+
+        .content{
+          .widthandheight(100%,auto,normal);
+          background-color:#fff;
+          min-height:8.5rem;
+          border-bottom-right-radius:10px;
+          border-bottom-left-radius:10px;
+
+          .logItem{
+            border-bottom: 1px solid #EFEFEF;
+            display: flex;
+            padding:0.8em 0.3em 0.5em 0.3em;
+
+            .logItemIconWrapper{
+              width: 5em;
+            }
+
+            .logItemIcon{
+              margin-left:0.5em;
+              margin-top:0.1em;
+              width:4em;
+              height: 4em;
+              line-height: 4em;
+              border-radius: 50%;
+              text-align: center;
+              color: #fff;
+              font-weight: bolder;
+            }
+
+            .logTaskInfo{
+              flex:1;
+
+            }
+
+            .logTaskTitle{
+              font-size:1.2em;
+              font-weight: bold;
+              line-height: 1.6em;
+            }
+
+            .logTaskTag{
+              font-size: 0.8em;
+              border-radius: 3px;
+              border: 1px solid #9da7b2;
+              background: #EFEFEF;
+              display: inline-block;
+              padding:1px 3px 1px 3px;
+            }
+          }
+        }
+
+      }
+
+  }
+
+  .homebottom{
+
+    background-color:@colorB;
+    height:1.2rem;
+    width:100%;
+    position:fixed;
+    bottom:0;
+
+  }
+
+}
+
+

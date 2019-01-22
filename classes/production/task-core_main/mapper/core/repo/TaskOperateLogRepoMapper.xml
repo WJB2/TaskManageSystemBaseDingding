@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hozensoft.task.core.dao.repo.TaskOperateLogRepo">
+
+    <insert id="addTaskOperateLog">
+        insert into tm_task_operate_log(id, tenant_id, op_type, task_id,
+        operate_by_id, operate_time, description)
+        values(#{id}, #{tenantId}, #{opType}, #{taskId}, #{operateById},
+        #{operateTime}, #{description})
+    </insert>
+
+    <resultMap id="taskOperateLogMap" type="com.hozensoft.task.core.domain.TaskOperateLog">
+        <id property="id" column="id" />
+        <result property="tenantId" column="tenant_id" />
+        <result property="taskId" column="taskId" />
+        <result property="opType" column="op_type" />
+        <result property="operateById" column="operate_by_id" />
+        <result property="operateTime" column="operate_time" />
+        <result property="description" column="description" />
+    </resultMap>
+
+    <sql id="selectTaskOperateLogParts">
+        select log.id as id, log.tenant_id as tenant_id, log.task_id as task_id,
+        log.op_type as op_type, log.operate_by_id as operate_by_id,
+        log.operate_time as operate_time, log.description as description
+        from tm_task_operate_log
+    </sql>
+
+    <select id="loadTaskOperateLogById" resultMap="taskOperateLogMap">
+        <include refid="selectTaskOperateLogParts" />
+        where id = #{taskOperateLogId} and tenant_id = #{tenantId}
+    </select>
+</mapper>

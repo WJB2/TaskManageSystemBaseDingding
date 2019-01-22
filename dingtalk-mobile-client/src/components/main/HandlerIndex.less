@@ -1,0 +1,54 @@
+@import '../../styles/default.less';
+
+.mainCircle{
+
+  width:1.3rem;
+  height:1.3rem;
+  border-radius:50%;
+  position:fixed;
+  display:flex;
+  bottom:2rem;
+  right:0.8rem;
+  text-align:center;
+  align-items:center;
+  justify-content:center;
+
+  .mainplus{
+
+    background: @colorB;
+    height: 0.6rem;
+    .pos(a);
+    top:0.33rem;
+    width: 2px;
+
+  }
+
+  .mainplus:after {
+
+    background: @colorB;
+    content: "";
+    height: 0.6rem;
+    left: 0.2;
+    position: absolute;
+    top: 0;
+    width: 2px;
+    transform: rotateZ(90deg)
+
+  }
+}
+
+.mainTabbar{
+
+  :global{
+    .am-tab-bar-bar{
+      height:1.5rem;
+      position:fixed;
+      bottom:0
+    }
+  }
+
+}
+
+
+
+

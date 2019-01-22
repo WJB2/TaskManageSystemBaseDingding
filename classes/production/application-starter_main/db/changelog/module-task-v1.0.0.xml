@@ -1,0 +1,388 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="create_tm_project" author="gongjunpeng">
+        <comment>创建项目列表</comment>
+        <createTable tableName="tm_project" remarks="项目表">
+            <column name=" id" type="VARCHAR(32)" remarks="ID">
+              <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="tenant_id" type="VARCHAR(32)" remarks="租户ID">
+               <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(80)" remarks="项目名称">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(400)" remarks="项目描述">
+                <constraints nullable="true"/>
+            </column>
+            <column name="begin_time" type="TIMESTAMP" remarks="开始时间">
+                <constraints nullable="true"/>
+            </column>
+            <column name="end_time" type="TIMESTAMP" remarks="结束时间">
+                <constraints nullable="true"/>
+            </column>
+            <column name="label" type="VARCHAR(80)" remarks="标记">
+                <constraints nullable="true"/>
+            </column>
+            <column name="deleted_flag" type="NUMERIC(1,0)" remarks="逻辑删除标记">
+                <constraints nullable="true"/>
+            </column>
+            <column name="created_by_id" type="VARCHAR(32)" remarks="创建人ID">
+                <constraints nullable="true"/>
+            </column>
+            <column name="created_org_id" type="VARCHAR(32)" remarks="创建部门ID">
+                <constraints nullable="true"/>
+            </column>
+            <column name="created_time" type="TIMESTAMP" remarks="创建时间">
+                <constraints nullable="true"/>
+            </column>
+            <column name="updated_by_id" type="VARCHAR(32)" remarks="修改人ID">
+                <constraints nullable="true"/>
+            </column>
+            <column name="updated_org_id" type="VARCHAR(32)" remarks="修改部门ID">
+                <constraints nullable="true"/>
+            </column>
+            <column name="updated_time" type="TIMESTAMP" remarks="修改时间">
+                <constraints nullable="true"/>
+            </column>
+            <column name="deleted_by_id" type="VARCHAR(32)" remarks="删除人ID">
+                <constraints nullable="true"/>
+            </column>
+            <column name="deleted_org_id" type="VARCHAR(32)" remarks="删除部门ID">
+                <constraints nullable="true"/>
+            </column>
+            <column name="deleted_time" type="TIMESTAMP" remarks="删除时间">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create_tm_project_domain_link" author="zhujingjun">
+        <comment>创建项目与其他实体关系表</comment>
+        <createTable tableName="tm_project_domain_link">
+            <column name=" id" type="VARCHAR(32)" remarks="ID">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="tenant_id" type="VARCHAR(32)" remarks="租户ID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="project_id" type="VARCHAR(32)" remarks="项目ID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="project_field" type="VARCHAR(128)" remarks="项目字段">
+                <constraints nullable="false"/>
+            </column>
+            <column name="domain_type" type="VARCHAR(128)" remarks="引用实体模型">
+                <constraints nullable="false"/>
+            </column>
+            <column name="domain_id" type="VARCHAR(32)" remarks="引用实体ID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sort_no" type="NUMERIC(4, 0)" remarks="显示顺序">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create_tm_task" author="gongjunpeng">
+       <comment>创建任务表</comment>
+        <createTable tableName="tm_task" remarks="任务表">
+            <column name="id" type="VARCHAR(32)" remarks="ID">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="tenant_id" type="VARCHAR(32)" remarks="租户ID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="project_id" type="VARCHAR(32)" remarks="项目ID">
+                <constraints nullable="true"/>
+            </column>
+            <column name="parent_id" type="VARCHAR(32)" remarks="上级项目ID">
+                <constraints nullable="true"/>
+            </column>
+            <column name="task_type" type="NUMERIC" remarks="任务类型">
+                <constraints nullable="false"/>
+            </column>
+            <column name="title" type="VARCHAR(400)" remarks="任务标题">
+                <constraints nullable="false"/>
+            </column>
+            <column name="content" type="VARCHAR(8000)" remarks="任务内容">
+                <constraints nullable="true"/>
+            </column>
+            <column name="owner_bonus_points" type="NUMERIC(18,0)" remarks="创建人积分">
+                <constraints nullable="true"/>
+            </column>
+            <column name="assignee_bonus_points" type="NUMERIC(18,0)" remarks="责任人积分">
+                <constraints nullable="true"/>
+            </column>
+            <column name="participator_bonus_points" type="NUMERIC(18,0)" remarks="参与人积分">
+                <constraints nullable="true"/>
+            </column>
+            <column name="progress_status" type="NUMERIC(3)" remarks="任务进度">
+                <constraints nullable="true"/>
+            </column>
+            <column name="begin_time" type="TIMESTAMP" remarks="开始时间">
+                <constraints nullable="true"/>
+            </column>
+            <column name="end_time" type="TIMESTAMP" remarks="结束时间">
+                <constraints nullable="true"/>
+            </column>
+            <column name="completed" type="NUMERIC(1,0)" remarks="是否完成">
+                <constraints nullable="false"/>
+            </column>
+            <column name="completed_by_id" type="VARCHAR(32)" remarks="完成人">
+                <constraints nullable="true"/>
+            </column>
+            <column name="completed_time" type="TIMESTAMP" remarks="完成时间">
+                <constraints nullable="true"/>
+            </column>
+            <column name="archived" type="NUMERIC(1,0)" remarks="归档标记">
+                <constraints nullable="false"/>
+            </column>
+            <column name="archived_by_id" type="VARCHAR(32)" remarks="归档人">
+                <constraints nullable="true"/>
+            </column>
+            <column name="archived_time" type="TIMESTAMP" remarks="归档时间">
+                <constraints nullable="true"/>
+            </column>
+            <column name="suspended" type="NUMERIC(1,0)" remarks="挂起标记">
+                <constraints nullable="false"/>
+            </column>
+            <column name="suspended_by_id" type="VARCHAR(32)" remarks="挂起人">
+                <constraints nullable="true"/>
+            </column>
+            <column name="suspended_time" type="TIMESTAMP" remarks="挂起时间">
+                <constraints nullable="true"/>
+            </column>
+            <column name="open_times" type="INT(8)" remarks="重启次数">
+                <constraints nullable="true"/>
+            </column>
+            <column name="description" type="VARCHAR(1000)" remarks="任务描述">
+                <constraints nullable="true"/>
+            </column>
+            <column name="deleted_flag" type="NUMERIC(1,0)" remarks="逻辑删除标记">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by_id" type="VARCHAR(32)" remarks="创建人ID">
+                <constraints nullable="true"/>
+            </column>
+            <column name="created_org_id" type="VARCHAR(32)" remarks="创建部门ID">
+                <constraints nullable="true"/>
+            </column>
+            <column name="created_time" type="TIMESTAMP" remarks="创建时间">
+                <constraints nullable="true"/>
+            </column>
+            <column name="updated_by_id" type="VARCHAR(32)" remarks="修改人ID">
+                <constraints nullable="true"/>
+            </column>
+            <column name="updated_org_id" type="VARCHAR(32)" remarks="修改部门ID">
+                <constraints nullable="true"/>
+            </column>
+            <column name="updated_time" type="TIMESTAMP" remarks="修改时间">
+                <constraints nullable="true"/>
+            </column>
+            <column name="deleted_by_id" type="VARCHAR(32)" remarks="删除人ID">
+                <constraints nullable="true"/>
+            </column>
+            <column name="deleted_org_id" type="VARCHAR(32)" remarks="删除部门ID">
+                <constraints nullable="true"/>
+            </column>
+            <column name="deleted_time" type="TIMESTAMP" remarks="删除时间">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="alter_table_tm_task_20181108" author="zhujingjun">
+        <addColumn tableName="tm_task">
+            <column name="audited" type="NUMERIC(1,0)" defaultValue="0" remarks="是否审核">
+                <constraints nullable="false"/>
+            </column>
+            <column name="audited_by_id" type="VARCHAR(32)" remarks="审核人">
+                <constraints nullable="true"/>
+            </column>
+            <column name="audited_time" type="TIMESTAMP" remarks="审核时间">
+                <constraints nullable="true"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="create_tm_task_domain_link" author="zhujingjun">
+        <comment>创建任务与其他实体关系表</comment>
+        <createTable tableName="tm_task_domain_link">
+            <column name=" id" type="VARCHAR(32)" remarks="ID">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="tenant_id" type="VARCHAR(32)" remarks="租户ID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="task_id" type="VARCHAR(32)" remarks="任务ID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="task_field" type="VARCHAR(128)" remarks="任务字段">
+                <constraints nullable="false"/>
+            </column>
+            <column name="domain_type" type="VARCHAR(128)" remarks="引用实体模型">
+                <constraints nullable="false"/>
+            </column>
+            <column name="domain_id" type="VARCHAR(32)" remarks="引用实体ID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sort_no" type="NUMERIC(4, 0)" remarks="显示顺序">
+                <constraints nullable="false"/>
+            </column>
+            <column name="completed" type="NUMERIC(1, 0)" remarks="是否完成">
+                <constraints nullable="false" />
+            </column>
+            <column name="completed_time" type="TIMESTAMP" remarks="完成时间">
+                <constraints nullable="true" />
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create_tm_task_staff_domain_link" author="zhujingjun">
+        <comment>创建个人任务与其他实体关系表</comment>
+        <createTable tableName="tm_task_staff_domain_link">
+            <column name=" id" type="VARCHAR(32)" remarks="ID">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="tenant_id" type="VARCHAR(32)" remarks="租户ID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="task_id" type="VARCHAR(32)" remarks="任务ID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="staff_id" type="VARCHAR(32)" remarks="人员ID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="task_field" type="VARCHAR(128)" remarks="任务字段">
+                <constraints nullable="false"/>
+            </column>
+            <column name="domain_type" type="VARCHAR(128)" remarks="引用实体模型">
+                <constraints nullable="false"/>
+            </column>
+            <column name="domain_id" type="VARCHAR(32)" remarks="引用实体ID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sort_no" type="NUMERIC(4, 0)" remarks="显示顺序">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create_tm_task_operate_log" author="zhujingjun">
+        <comment>创建任务操作历史记录表</comment>
+        <createTable tableName="tm_task_operate_log">
+            <column name="id" type="VARCHAR(32)" remarks="ID">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="tenant_id" type="VARCHAR(32)" remarks="租户ID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="op_type" type="NUMERIC(3,0)" remarks="标签类型">
+                <constraints nullable="false"/>
+            </column>
+            <column name="task_id" type="VARCHAR(32)" remarks="任务ID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="operate_by_id" type="VARCHAR(32)" remarks="任务ID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="operate_time" type="TIMESTAMP" remarks="任务ID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(8000)" remarks="任务ID">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create_tm_task_operate_log_staff_link" author="zhujingjun">
+        <comment>创建任务操作记录人员读取表</comment>
+        <createTable tableName="tm_task_operate_log_staff_link">
+            <column name="id" type="VARCHAR(32)" remarks="ID">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="tenant_id" type="VARCHAR(32)" remarks="租户ID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="task_id" type="VARCHAR(32)" remarks="任务ID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="staff_id" type="VARCHAR(32)" remarks="人员ID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="operate_log_id" type="VARCHAR(32)" remarks="操作记录ID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="readed" type="NUMERIC(1,0)" remarks="是否已读标记">
+                <constraints nullable="false"/>
+            </column>
+            <column name="readed_time" type="TIMESTAMP" remarks="阅读时间">
+                <constraints nullable="true"/>
+            </column>
+            <column name="sort_no" type="NUMERIC(8,0)" remarks="显示顺序">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    
+    <changeSet id="create_tm_task_tag" author="gongjunpeng">
+        <comment>创建任务标签表</comment>
+        <createTable tableName="tm_task_tag" remarks="任务标签表">
+            <column name="id" type="VARCHAR(32)" remarks="ID">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="tenant_id" type="VARCHAR(32)" remarks="租户ID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="tag_type" type="NUMERIC(3,0)" remarks="标签类型">
+                <constraints nullable="true"/>
+            </column>
+            <column name="name" type="VARCHAR(80)" remarks="标签内容">
+                <constraints nullable="false"/>
+            </column>
+            <column name="org_id" type="VARCHAR(32)" remarks="组织ID">
+                <constraints nullable="true"/>
+            </column>
+            <column name="staff_id" type="VARCHAR(32)" remarks="人员ID">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create_tm_task_group" author="zhujingjun">
+        <comment>创建任务群组表</comment>
+        <createTable tableName="tm_task_group" remarks="任务群组信息表">
+            <column name="id" type="VARCHAR(32)" remarks="ID">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="tenant_id" type="VARCHAR(32)" remarks="租户ID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(80)" remarks="标签内容">
+                <constraints nullable="false"/>
+            </column>
+            <column name="staff_id" type="VARCHAR(32)" remarks="人员ID">
+                <constraints nullable="true"/>
+            </column>
+            <column name="sort_no" type="NUMERIC(10,0)" remarks="显示顺序">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="alter_tm_task_20180907" author="zhujingjun">
+        <addColumn tableName="tm_task">
+            <column name="unreachable" type="NUMERIC(1,0)" defaultValue="0" remarks="不能完成标记">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
+ </databaseChangeLog>

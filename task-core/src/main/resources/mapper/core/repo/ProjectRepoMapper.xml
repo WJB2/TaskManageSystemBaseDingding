@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hozensoft.task.core.dao.repo.ProjectRepo">
+    <insert id="addProject">
+        insert into tm_project(id, tenant_id, name, description, begin_time, end_time, label, deleted_flag,
+        created_by_id, created_org_id, created_time, updated_by_id, updated_org_id, updated_time, deleted_by_id,
+        deleted_org_id, deleted_time)
+        values (#{id}, #{tenantId}, #{name}, #{description}, #{beginTime}, #{endTime}, #{label},
+        #{deletedFlag,jdbcType=NUMERIC}, #{createdById}, #{createdOrgId}, #{createdTime}, #{updatedById},
+        #{updatedOrgId}, #{updatedTime}, #{deletedById}, #{deletedOrgId}, #{deletedTime})
+    </insert>
+
+    <insert id="addProjectMemberIdList">
+      insert into tm_project_member(tenant_id, project_id, staff_id)
+      values
+      <foreach collection="memberIdList" item="i" separator=",">
+          (#{tenantId}, #{projectId}, #{i})
+      </foreach>
+    </insert>
+
+    <insert id="addProjectOrgIdList">
+      insert into tm_project_org(tenant_id, project_id, org_id)
+      values
+        <foreach collection="orgIdList" item="i" separator=",">
+            (#{tenantId}, #{projectId}, #{i})
+        </foreach>
+    </insert>
+
+    <update id="editProject">
+        update tm_project set
+           tenant_id = #{tenantId},
+           name = #{name},
+           description = #{description},
+           begin_time = #{beginTime},
+           end_time = #{endTime},
+           label = #{label},
+           deleted_flag = #{deletedFlag,jdbcType=NUMERIC},
+           created_by_id = #{createdById},
+           created_org_id = #{createdOrgId},
+           created_time = #{createdTime},
+           updated_by_id = #{updatedById},
+           updated_org_id = #{updatedOrgId},
+           updated_time = #{updatedTime},
+           deleted_by_id = #{deletedById},
+           deleted_org_id = #{deletedOrgId},
+           deleted_time = #{deletedTime}
+        where id = #{id}
+    </update>
+
+    <update id="patchEditProject">
+        update tm_project
+        <set>
+            <if test="tenantId != null">
+                tenant_id = #{tenantId},
+            </if>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="description != null">
+                description = #{description},
+            </if>
+            <if test="beginTime != null">
+                begin_time = #{beginTime},
+            </if>
+            <if test="endTime != null">
+                end_time = #{endTime},
+            </if>
+            <if test="label != null">
+                label = #{label},
+            </if>
+            <if test="deletedFlag != null">
+                deleted_flag = #{deletedFlag,jdbcType=NUMERIC},
+            </if>
+            <if test="updatedById != null">
+                updated_by_id = #{updatedById},
+            </if>
+            <if test="updatedOrgId != null">
+                updated_org_id = #{updatedOrgId},
+            </if>
+            <if test="updatedTime != null">
+                updated_time = #{updatedTime},
+            </if>
+            <if test="deletedById != null">
+                deleted_by_id = #{deletedById},
+            </if>
+            <if test="deletedOrgId != null">
+                deleted_org_id = #{deletedOrgId},
+            </if>
+            <if test="deletedTime != null">
+                deleted_time = #{deletedTime},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+
+    <delete id="deleteProjectById">
+        delete from tm_project where id = #{projectId}
+    </delete>
+
+    <delete id="deleteProjectMemberByProjectId">
+        delete from tm_project_member where tenant_id=#{tenantId} and project_id = #{projectId}
+    </delete>
+
+    <delete id="deleteProjectOrgByProjectId">
+        delete from tm_project_org where tenant_id=#{tenantId} and org_id = #{projectId}
+    </delete>
+
+    <resultMap id="projectMap" type="com.hozensoft.task.core.domain.Project">
+        <id property="id" column="id"/>
+        <result property="tenantId" column="tenant_id"/>
+        <result property="name" column="name"/>
+        <result property="description" column="description"/>
+        <result property="beginTime" column="begin_time"/>
+        <result property="endTime" column="end_time"/>
+        <result property="label" column="label"/>
+        <result property="deletedFlag" column="deleted_flag"/>
+        <result property="createdById" column="created_by_id"/>
+        <result property="createdOrgId" column="created_org_id"/>
+        <result property="createdTime" column="created_time"/>
+        <result property="updatedById" column="updated_by_id"/>
+        <result property="updatedOrgId" column="updated_org_id"/>
+        <result property="updatedTime" column="updated_time"/>
+        <result property="deletedById" column="deleted_by_id"/>
+        <result property="deletedOrgId" column="deleted_org_id"/>
+        <result property="deletedTime" column="deleted_time"/>
+    </resultMap>
+
+    <sql id="selectProjectPart">
+        select pj.id as id, pj.tenant_id as tenant_id, pj.name as name, pj.description as description,
+        pj.begin_time as begin_time, pj.end_time as end_time, pj.label as label, pj.deleted_flag as deleted_flag,
+        pj.created_by_id as created_by_id, pj.created_org_id as created_org_id, pj.created_time as created_time,
+        pj.updated_by_id as updated_by_id, pj.updated_org_id as updated_org_id, pj.updated_time as updated_time,
+        pj.deleted_by_id as deleted_by_id, pj.deleted_org_id as deleted_org_id, pj.deleted_time as deleted_time
+        from tm_project as pj
+    </sql>
+
+    <select id="loadProjectById" resultMap="projectMap">
+        <include refid="selectProjectPart"/>
+        where pj.id = #{projectId}
+    </select>
+</mapper>

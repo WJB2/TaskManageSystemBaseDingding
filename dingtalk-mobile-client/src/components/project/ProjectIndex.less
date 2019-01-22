@@ -1,0 +1,90 @@
+@import '../../styles/default.less';
+
+
+.labelSelector{//项目部分的标记选择器
+
+  width:100%;
+  height:1.3rem;
+  background-color:@colorB;
+  display:flex;
+  align-items:center;
+  .boxsizing;
+  font-size:0.5rem;
+  padding-left:0.5rem;
+
+  .labelSelectorText{
+    width:3rem;
+  }
+
+  .labelSelectorContainer{
+    flex:1;
+    display:flex;
+    align-item:center;
+    background-color:colorD;
+    box-sizing:border-box;
+  }
+
+  .labelSelectorBall{
+
+    display:inline-block;
+    width:0.4rem;
+    height:0.4rem;
+    flex-shrink:0;
+    flex-grow:0;
+    background-color:@colorM;
+    border-radius:50%;
+    margin-right:0.5rem;
+    box-sizing:border-box;
+
+  }
+
+}
+
+.organizationSelector{//项目部分的项目选择面板
+
+  :global{
+    .am-list-extra{
+      flex-basis:70%!important;
+    }
+  }
+  .organizationSelectorBlock{
+
+  }
+
+  .organizationSelectorList{
+    font-size:0.4rem;
+    float:right;
+  }
+
+}
+
+.projectSelector{//项目部分的项目选择面板
+
+  :global{
+    .am-list-extra{
+      flex-basis:70%!important;
+    }
+
+
+  }
+
+  .projectSelectorBlock{
+
+  }
+
+  .projectSelectorList{
+
+    width:0.8rem;
+    height:0.8rem;
+    line-height:0.8rem;
+    .borderRadius(50%);
+    color:@colorB;
+    font-size:0.3rem;
+    text-align:center;
+    float:right;
+
+  }
+
+}
+
+

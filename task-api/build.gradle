@@ -1,0 +1,14 @@
+
+dependencies {
+
+    compile "com.hozensoft:application-configuration:0.0.1-SNAPSHOT"
+
+    compile "com.hozensoft:application-common:0.0.1-SNAPSHOT"
+
+    compile "com.hozensoft:global-api:0.0.1-SNAPSHOT"
+
+    compile "com.hozensoft:user-api:0.0.1-SNAPSHOT"
+
+    compile "com.hozensoft:system-api:0.0.1-SNAPSHOT"
+}
+

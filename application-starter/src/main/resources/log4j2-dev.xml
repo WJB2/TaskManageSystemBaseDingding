@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="warn">
+
+	<Appenders>
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout pattern="[%p] [%d{COMPACT}] RequestID:%X{RequestID}, %l, %m%n" />
+		</Console>
+
+		<RollingFile name="LogInfoRollingFile" fileName="${sys:user.home}/logs/hpaasvc/info.log"
+			filePattern="${sys:user.home}/logs/hpaasvc/$${date:yyyy-MM}/info-%d{yyyy-MM-dd}-%i.log">
+			<Filters>
+				<ThresholdFilter level="INFO" />
+				<ThresholdFilter level="WARN" onMatch="DENY"
+					onMismatch="NEUTRAL" />
+			</Filters>
+			<PatternLayout pattern="[%d{COMPACT}] [%p] - %l - %m%n" />
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="100 MB" />
+			</Policies>
+		</RollingFile>
+
+		<RollingFile name="LogWarnRollingFile" fileName="${sys:user.home}/logs/hpaasvc/warn.log"
+			filePattern="${sys:user.home}/logs/hpaasvc/$${date:yyyy-MM}/warn-%d{yyyy-MM-dd}-%i.log">
+			<Filters>
+				<ThresholdFilter level="WARN" />
+				<ThresholdFilter level="ERROR" onMatch="DENY"
+					onMismatch="NEUTRAL" />
+			</Filters>
+			<PatternLayout pattern="[%d{COMPACT}] [%p] - %l - %m%n" />
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="100 MB" />
+			</Policies>
+		</RollingFile>
+
+		<RollingFile name="LogErrorRollingFile"
+			fileName="${sys:user.home}/logs/hpaasvc/error.log"
+			filePattern="${sys:user.home}/logs/hpaasvc/$${date:yyyy-MM}/error-%d{yyyy-MM-dd}-%i.log">
+			<ThresholdFilter level="ERROR" />
+			<PatternLayout pattern="[%d{COMPACT}] [%p] - %l - %m%n" />
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="100 MB" />
+			</Policies>
+		</RollingFile>
+
+	</Appenders>
+
+	<Loggers>
+		<!--过滤掉spring和hibernate的一些无用的debug信息 -->
+		<Logger name="org.springframework" level="ERROR">
+			<AppenderRef ref="Console" />
+		</Logger>
+		<Logger name="com.dingtalk" level="ERROR">
+			<AppenderRef ref="Console" />
+		</Logger>
+		<Logger name="org.apache" level="ERROR">
+			<AppenderRef ref="Console" />
+		</Logger>
+		<Logger name="org.apache.ibatis" level="ERROR">
+			<AppenderRef ref="Console" />
+		</Logger>
+		<Logger name="org.mybatis" level="ERROR">
+			<AppenderRef ref="Console" />
+		</Logger>
+		<Logger name="org.hibernate" level="ERROR">
+			<AppenderRef ref="Console" />
+		</Logger>
+		<Logger name="org.flowable" level="ERROR">
+			<AppenderRef ref="Console" />
+		</Logger>
+		<Logger name="liquibase" level="ERROR">
+			<AppenderRef ref="Console" />
+		</Logger>
+		<Logger name="springfox.documentation" level="ERROR">
+			<AppenderRef ref="Console" />
+		</Logger>
+		<Logger name="com.alibaba.druid" level="ERROR">
+			<AppenderRef ref="Console" />
+		</Logger>
+		<Logger name="de.codecentric.boot" level="ERROR">
+			<AppenderRef ref="Console" />
+		</Logger>
+		<Logger name="com.netflix" level="ERROR">
+			<AppenderRef ref="Console" />
+		</Logger>
+		<Logger name="org.flywaydb" level="ERROR">
+			<AppenderRef ref="Console" />
+		</Logger>
+		<Logger name="io.netty" level="ERROR">
+			<AppenderRef ref="Console" />
+		</Logger>
+		<Logger name="com.mongodb" level="ERROR">
+			<AppenderRef ref="Console" />
+		</Logger>
+		<Logger name="net.sf.ehcache" level="ERROR">
+			<AppenderRef ref="Console" />
+		</Logger>
+		<Root level="ERROR">
+			<AppenderRef ref="Console" />
+			<AppenderRef ref="LogInfoRollingFile" />
+			<AppenderRef ref="LogWarnRollingFile" />
+			<AppenderRef ref="LogErrorRollingFile" />
+		</Root>
+	</Loggers>
+
+</Configuration>

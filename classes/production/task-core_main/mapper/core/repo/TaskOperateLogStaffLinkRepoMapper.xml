@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hozensoft.task.core.dao.repo.TaskOperateLogStaffLinkRepo">
+
+    <insert id="addTaskOperateLogStaffLinkList">
+        insert into tm_task_operate_log_staff_link (id, tenant_id, task_id, staff_id, operate_log_id,
+        readed, readed_time, sort_no) values
+        <foreach collection="links" item="i" separator="," >
+            (#{i.id}, #{i.tenantId}, #{i.taskId}, #{i.staffId}, #{i.operateLogId},
+            #{i.readed, jdbcType=NUMERIC}, #{i.readedTime}, #{i.sortNo})
+        </foreach>
+    </insert>
+
+    <update id="editTaskOperateLogStaffLinkReaded">
+        update tm_task_operate_log_staff_link set
+          readed = #{readed, jdbcType=NUMERIC},
+          readed_time = #{readedTime}
+        where operate_log_id = #{operateLogId}
+        and task_id = #{taskId}
+        and staff_id = #{staffId}
+        and tenant_id = #{tenantId}
+    </update>
+</mapper>

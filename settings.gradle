@@ -1,0 +1,8 @@
+rootProject.name = 'TaskManagement'
+
+include 'application-starter'
+
+include 'task-api'
+include 'task-core'
+include 'task-test-suite-configuration'
+
